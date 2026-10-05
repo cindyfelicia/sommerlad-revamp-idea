@@ -25,22 +25,34 @@ Design reference for the sommerlad.li homepage revamp. `index.html` is a single,
 
 ---
 
-## 2. Design system
+## 2. Design system — v2 "industrial"
+
+The direction is Neues Bauen and industrial rather than editorial: concrete greys, steel, hairline drawing-sheet structure, hard clip-path "cuts" instead of fades, and frosted-glass panels over photography.
 
 | Token | Value | Use |
 |---|---|---|
-| `--paper` | `#F8F5F0` | Base background |
-| `--paper-2` | `#EFEAE2` | Alternate section (Works) |
-| `--ink` | `#2A2A2A` | Headlines, dark sections |
-| `--red` | `#B5451B` | **Primary accent**: CTAs, eyebrows, italic emphasis |
-| `--ochre` | `#C9962A` | Secondary accent, used sparingly (on dark backgrounds only) |
+| `--concrete` | `#E9EAE8` | Base background (cool, not beige) |
+| `--steel` / `--steel-2` | `#8B8F93` / `#5E6266` | Labels / body text |
+| `--graphite` | `#2A2A2A` | Works section, anthracite primary |
+| `--ink` | `#18191B` | Headlines, hero, contact |
+| `--red` | `#B5451B` | **Only accent**: index numbers, progress, CTA fills, the red "roof" bar on panels |
 
-**Recommendation:** use red as the single accent and keep ochre as a whisper. Using both at equal weight turns "earthy" into "autumn café".
+Ochre is dropped. On a grey palette it reads muddy, and one signal colour feels more industrial.
 
-- **Display:** Cormorant Garamond. An editorial serif with italics used for single emphasised words.
-- **UI / body:** Jost. A geometric sans in the Futura family, which is a direct Bauhaus-era reference.
-- **Grid:** max 1320 px, fluid 16–56 px gutter, generous vertical rhythm (≈ 100–160 px between sections).
-- **Motion:** slow and quiet (0.9–1.6 s eases) and respects `prefers-reduced-motion`.
+- **Display:** Archivo, variable, set condensed (`font-stretch: 66–72%`) in heavy uppercase. **Outlined** (transparent fill, stroke only) words alternate with solid ones.
+- **Technical labels:** IBM Plex Mono, used for index numbers, object numbers, coordinates and nav. This gives the "drawing title block" feel.
+- **Body:** Archivo at normal width.
+- **Signature details:**
+  - Hairline 4-column grid over the hero
+  - Glass nav bar and glass info panels (`backdrop-filter: blur`)
+  - Stats as outlined numerals in frosted cells over a photo
+  - Each work's details shown as an architectural drawing **title block** (object no. / year / location / type)
+- **Motion:** mechanical ease (`cubic-bezier(.77,0,.18,1)`):
+  - Hero slides wipe in with a hard edge
+  - Images and the footer wordmark reveal by clip-path
+  - Buttons fill with a red wipe
+  - Respects `prefers-reduced-motion`
+- **Works pile:** modelled on the macOS "Vintage Prints" screen saver. Individual white-bordered prints lie scattered at random angles, and each new one drops onto the pile and settles. It autoplays every ~5 s while in view and pauses on hover. Click the top print to open the lightbox; swipe or use the arrow keys to browse.
 
 ---
 
@@ -50,7 +62,7 @@ Design reference for the sommerlad.li homepage revamp. `index.html` is a single,
 
 | Section | WP implementation |
 |---|---|
-| Global colours / fonts | GeneratePress Customizer → Global Colors (tokens above), Typography. Self-host fonts for GDPR, either through GP's font library or OMGF. |
+| Global colours / fonts | GeneratePress Customizer → Global Colors (tokens above), Typography. Self-host Archivo (variable) and IBM Plex Mono for GDPR, either through GP's font library or OMGF. |
 | Header + transparent-over-hero | GP Premium *Header Element* (merge with content). Or Blocksy transparent header. |
 | DE / EN | **Polylang** (free is enough) with its language-switcher block in the menu. The `lang` spans in this file become two separate translated pages. |
 | Hero slideshow | GenerateBlocks Container (100vh) + **the vanilla JS from this file** enqueued in the child theme (≈ 40 lines). Avoid Revolution Slider-type bloat. MetaSlider is the fallback if the client wants to manage slides themselves. |
