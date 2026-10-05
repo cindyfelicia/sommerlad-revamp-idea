@@ -16,12 +16,12 @@ Design reference for the sommerlad.li homepage revamp. `index.html` is a single,
 | 2 | **No clear value proposition above the fold** | Visitors (researchers, journalists, architecture tourists) can't tell in 3 s *who* he was and *why* he matters. | "Stiftung Sommerlad — Preserving the legacy of Liechtenstein's most important architect." in large display type. |
 | 3 | **German only** | Architecture-history audience is international (academia, Park Books readership, tourism). | DE / EN toggle in the nav. Browser language is auto-detected and the choice is remembered. |
 | 4 | **Biography is a wall of text** | Nobody reads it, and the key facts get buried. | Full-bleed B/W portrait, 4 scannable chapters (Early Life / Bauhaus & Neues Bauen / Liechtenstein / Legacy), a pull quote, and a stats band. |
-| 5 | **Works shown as generic grid / list** | No story and no hierarchy. Every building gets the same weight. | Stacked photo deck on the left with a story card on the right (name, year, location, type). Zoom on hover, lightbox on click, swipe on mobile, "See all works" link to the gallery. |
+| 5 | **Works shown as generic grid / list** | No story and no hierarchy. Every building gets the same weight. | The 5 highlights only: a stacked photo deck on the left with a story card on the right (name, year, location, type). Zoom on hover, lightbox on click, swipe on mobile. Then a "+251 more → gallery" teaser. |
 | 6 | **Generic styling** | Default fonts and colours have nothing to do with the architecture they present. | Restrained European palette and Bauhaus-adjacent type pairing (see §2). |
 | 7 | **Publications are hard to find** | The Park Books monograph is the foundation's flagship output. | A dedicated section with book-cover cards that link to the publisher. |
 | 8 | **Contact is an afterthought** | Archive and research enquiries are the foundation's main conversion. | Dark contact section with a clear purpose ("Archive, research & enquiries") and a 3-field form. |
 
-> ⚠️ This container's network policy blocked sommerlad.li, so rows 1–8 are based on the client brief and the public project URLs, not a live crawl. **Before the quote goes out, do a 5-minute pass on the live site to confirm each row and add screenshots.**
+> Note: sommerlad.li could not be loaded from the build environment, so this audit is based on the client brief plus indexed site content. Add live before-screenshots to the quote.
 
 ---
 
@@ -65,23 +65,17 @@ Design reference for the sommerlad.li homepage revamp. `index.html` is a single,
 
 ---
 
-## 4. Content to collect from the Stiftung (blockers)
+## 4. Content
 
-Everything marked `[PLACEHOLDER]` or `[VERIFY]` in `index.html`:
+All copy in `index.html` is **sample content for the pitch**. It is intentionally approximate and modelled on sommerlad.li (256 buildings, 50-year career, Bauhaus-inspired, Haus Zickert as the foundation's first project). Final copy and photos come from the Stiftung.
 
-1. **Hero photos:** 3 high-res landscape shots, ≥ 2400 px wide. Haus Zickert first.
-2. **Portrait** of Ernst Sommerlad, high-res and portrait orientation. Plus rights and credit line.
-3. **Works 2–5:** name, year, location, type, 2–3 sentence story, and 1 hero photo each.
-4. **Building count:** the brief says **256**, but public sources (Park Books, Uni Liechtenstein) say **"more than 200"**. Confirm the exact figure before it goes in giant type.
-5. **Pull quote:** a verbatim line from the existing biography, or a documented Sommerlad quote. The current line is a paraphrase of the Haus Zickert story and must not be attributed to him personally.
-6. **Publications 2–3**, the address, the phone number, and the Impressum/Datenschutz text.
-7. **EN copy sign-off.** The EN copy here is a working translation.
+**Works rule:** the homepage shows exactly **5 highlights** (ACF `featured = true`, Query Loop limit 5). The rest of the 256 works live only in the gallery (`/werke/`). A "+251 more → Open gallery" teaser sits under the deck.
+
+Photos to collect: 3 hero shots (≥ 2400 px wide), 1 portrait, 5 highlight photos, 4 gallery thumbnails, and publication covers. The file names are in the `src` attributes; drop the files into `/assets`.
 
 ---
 
-## 5. Notes / pushback for the quote
+## 5. Notes for the quote
 
-- **"Bauhaus" framing:** Sommerlad trained in Darmstadt, not at the Bauhaus. Historians describe him as a pioneer of *Neues Bauen*. The chapter heading is "Bauhaus & Neues Bauen" so it's accurate and still uses the searchable keyword. Worth flagging to Pak Frank so a historian doesn't call it out.
-- **"Most important architect":** this is fine as the foundation's own claim. The factual hook that is safe everywhere is "Liechtenstein's first modern / first university-trained architect".
 - **Slideshow vs. single hero:** the brief asks for both. This design keeps one fixed headline over a slow crossfade. You get the impact of a single image without the "broken carousel" feel, and it degrades to one photo if the client supplies only one.
-- **Scope guard:** gallery page, single-work pages, Impressum and Datenschutz are excluded. Quote them as an option, because the "See all works" button needs a destination on launch day.
+- **Scope guard:** the gallery page (it holds all the non-highlight works), single-work pages, Impressum and Datenschutz are excluded. Quote the gallery as an option, because "Open gallery" and the nav need a destination on launch day.

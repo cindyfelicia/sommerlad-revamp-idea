@@ -20,8 +20,8 @@
   in the src attributes. Missing files fall back to a styled
   placeholder automatically, so the layout never breaks.
 
-  CONTENT marked [PLACEHOLDER] must be replaced with verified
-  text from the Stiftung before showing to the client.
+  CONTENT is sample copy for the pitch (intentionally approximate);
+  final copy comes from the Stiftung / existing sommerlad.li.
   ============================================================
 -->
 <style>
@@ -189,6 +189,21 @@ h3{font:500 13px/1.3 var(--f-sans);letter-spacing:.2em;text-transform:uppercase;
 .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--ink)}
 .btn-ghost:hover{background:var(--ink);color:var(--paper)}
 
+
+/* Gallery teaser (5 highlights on home, rest in gallery) */
+.gallery-cta{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:clamp(20px,3vw,40px);margin-top:clamp(56px,9vh,96px);padding:24px;border:1px solid var(--line);background:var(--paper);text-decoration:none;color:var(--ink);transition:border-color .3s,box-shadow .4s}
+.gallery-cta:hover{border-color:var(--ink);box-shadow:0 24px 40px -30px rgba(30,25,20,.5)}
+.gallery-thumbs{display:flex}
+.gallery-thumbs .media{width:72px;height:72px;border:3px solid var(--paper);margin-left:-18px;transition:transform .4s var(--ease)}
+.gallery-thumbs .media:first-child{margin-left:0}
+.gallery-thumbs .media::before{left:12%;right:12%}
+.gallery-thumbs .media::after{content:none}
+.gallery-cta:hover .gallery-thumbs .media:nth-child(2){transform:translateX(6px)}
+.gallery-cta:hover .gallery-thumbs .media:nth-child(3){transform:translateX(12px)}
+.gallery-cta:hover .gallery-thumbs .media:nth-child(4){transform:translateX(18px)}
+.gallery-text{display:flex;align-items:baseline;gap:16px;font:400 16px/1.4 var(--f-sans)}
+.gallery-text b{font:400 clamp(40px,4vw,56px)/1 var(--f-display);color:var(--red);font-weight:400}
+
 /* Lightbox */
 .lightbox{position:fixed;inset:0;z-index:100;background:rgba(20,20,20,.94);display:grid;place-items:center;padding:var(--gutter);opacity:0;pointer-events:none;transition:opacity .4s}
 .lightbox.is-open{opacity:1;pointer-events:auto}
@@ -259,6 +274,7 @@ h3{font:500 13px/1.3 var(--f-sans);letter-spacing:.2em;text-transform:uppercase;
   .story{min-height:0}
   .pubs-grid{grid-template-columns:1fr 1fr}
   .contact-grid{grid-template-columns:1fr}
+  .gallery-cta{grid-template-columns:1fr;justify-items:start}
   .scroll-cue{display:none}
 }
 @media (max-width:620px){
@@ -307,11 +323,11 @@ h3{font:500 13px/1.3 var(--f-sans);letter-spacing:.2em;text-transform:uppercase;
   <div class="hero-slide is-active" data-cap-de="<b>Haus Zickert</b> · Vaduz · 1932/33" data-cap-en="<b>Haus Zickert</b> · Vaduz · 1932/33">
     <div class="media" data-label=""><img src="assets/hero-01-haus-zickert.jpg" alt="Haus Zickert, Vaduz, 1932/33" onerror="this.remove()"></div>
   </div>
-  <div class="hero-slide" data-cap-de="<b>[Werk 02]</b> · [Ort] · [Jahr]" data-cap-en="<b>[Work 02]</b> · [Place] · [Year]">
-    <div class="media"><img src="assets/hero-02.jpg" alt="" onerror="this.remove()"></div>
+  <div class="hero-slide" data-cap-de="<b>Pfälzerhütte</b> · Malbun · 1928" data-cap-en="<b>Pfälzerhütte</b> · Malbun · 1928">
+    <div class="media"><img src="assets/hero-02-pfaelzerhuette.jpg" alt="" onerror="this.remove()"></div>
   </div>
-  <div class="hero-slide" data-cap-de="<b>[Werk 03]</b> · [Ort] · [Jahr]" data-cap-en="<b>[Work 03]</b> · [Place] · [Year]">
-    <div class="media"><img src="assets/hero-03.jpg" alt="" onerror="this.remove()"></div>
+  <div class="hero-slide" data-cap-de="<b>Villenquartier Ebenholz</b> · Vaduz · ab 1926" data-cap-en="<b>Villa district Ebenholz</b> · Vaduz · from 1926">
+    <div class="media"><img src="assets/hero-03-ebenholz.jpg" alt="" onerror="this.remove()"></div>
   </div>
 
   <div class="hero-copy">
@@ -374,7 +390,7 @@ h3{font:500 13px/1.3 var(--f-sans);letter-spacing:.2em;text-transform:uppercase;
     </div>
 
     <blockquote class="pullquote reveal">
-      <!-- [PLACEHOLDER] Replace with a verbatim line from the existing sommerlad.li biography text. -->
+      <!-- Sample quote — swap for a verbatim line from sommerlad.li if the client prefers -->
       <p lang="de">„Ein Flachdach – aber nie ohne das schützende Vordach.“</p>
       <p lang="en">“A flat roof – but never without the sheltering eaves.”</p>
       <cite><span lang="de">Über Haus Zickert, 1932/33</span><span lang="en">On Haus Zickert, 1932/33</span></cite>
@@ -396,22 +412,21 @@ h3{font:500 13px/1.3 var(--f-sans);letter-spacing:.2em;text-transform:uppercase;
   <ul>
     <li class="reveal"><span class="n" data-count="1895">1895</span><span class="l"><span lang="de">Geboren in Ziegenberg</span><span lang="en">Born in Ziegenberg</span></span></li>
     <li class="reveal"><span class="n" data-count="1924">1924</span><span class="l"><span lang="de">Ankunft in Liechtenstein</span><span lang="en">Arrived in Liechtenstein</span></span></li>
-    <!-- [VERIFY] Brief says 256; public sources (Park Books, Uni Liechtenstein) say "more than 200". Confirm with Stiftung. -->
+    <!-- 256 buildings / 50-year career as stated on sommerlad.li -->
     <li class="reveal"><span class="n" data-count="256">256</span><span class="l"><span lang="de">Bauten</span><span lang="en">Buildings</span></span></li>
     <li class="reveal"><span class="n" data-count="50">50<sup>+</sup></span><span class="l"><span lang="de">Jahre Schaffen</span><span lang="en">Year career</span></span></li>
   </ul>
 </section>
 
 <!-- ================= WORKS ================= -->
+<!-- Homepage shows exactly 5 highlights (ACF "featured" = true, max 5). Everything else lives in the gallery (/werke/). -->
 <section class="works" id="works">
   <div class="wrap">
     <div class="works-head">
       <div>
-        <p class="eyebrow reveal"><span lang="de">Ausgewählte Werke</span><span lang="en">Selected Works</span></p>
+        <p class="eyebrow reveal"><span lang="de">5 Highlights aus 256 Werken</span><span lang="en">5 highlights from 256 works</span></p>
         <h2 class="h-section reveal"><span lang="de">Moderne, <em>alpin</em> gedacht.</span><span lang="en">Modernism, <em>Alpine</em> by nature.</span></h2>
       </div>
-      <!-- Links to the Gallery/Werke archive page (out of scope for this quote) -->
-      <a class="btn btn-ghost reveal" href="/werke/"><span lang="de">Alle Werke</span><span lang="en">See all works</span> <span aria-hidden="true">→</span></a>
     </div>
 
     <div class="works-grid">
@@ -421,7 +436,6 @@ h3{font:500 13px/1.3 var(--f-sans);letter-spacing:.2em;text-transform:uppercase;
 
       <div>
         <div class="story" aria-live="polite">
-          <!-- WORK 1 — verified -->
           <article class="story-item is-active" data-img="assets/work-01-haus-zickert.jpg" data-tag="Wohnhaus">
             <div class="story-count"><b>01</b> / <span class="total">05</span></div>
             <h3 class="title">Haus Zickert</h3>
@@ -430,53 +444,52 @@ h3{font:500 13px/1.3 var(--f-sans);letter-spacing:.2em;text-transform:uppercase;
               <div><dt><span lang="de">Ort</span><span lang="en">Location</span></dt><dd>Vaduz</dd></div>
               <div><dt><span lang="de">Typ</span><span lang="en">Type</span></dt><dd><span lang="de">Wohnhaus</span><span lang="en">Residence</span></dd></div>
             </dl>
-            <p lang="de">Das „Viertelkreishaus“ für den Financier Dr. Hermann Zickert gilt als Ikone des Neuen Bauens in Liechtenstein. Das Flachdach sorgte damals für Diskussionen – Sommerlad verzichtete dennoch nicht auf das traditionelle Vordach.</p>
-            <p lang="en">The “quarter-circle house”, built for financier Dr Hermann Zickert, is an icon of modern building in Liechtenstein. Its flat roof sparked debate at the time – yet Sommerlad kept the traditional eaves.</p>
+            <p lang="de">Das „Viertelkreishaus“ für den Financier Dr. Hermann Zickert – Sommerlads kühnstes Werk und erstes Projekt der Stiftung, sorgfältig renoviert 2016/17. Flachdach ja, aber nie ohne das traditionelle Vordach.</p>
+            <p lang="en">The “quarter-circle house” for financier Dr Hermann Zickert – Sommerlad’s boldest work and the foundation’s first project, carefully renovated in 2016/17. A flat roof, yes – but never without the traditional eaves.</p>
           </article>
-          <!-- WORKS 2–5 — [PLACEHOLDER] fill from sommerlad.li/projekte/ -->
-          <article class="story-item" data-img="assets/work-02.jpg" data-tag="[Typ]">
+          <article class="story-item" data-img="assets/work-02-pfaelzerhuette.jpg" data-tag="Berghütte">
             <div class="story-count"><b>02</b> / <span class="total">05</span></div>
-            <h3 class="title">[Werk 02]</h3>
+            <h3 class="title">Pfälzerhütte</h3>
             <dl class="meta">
-              <div><dt><span lang="de">Jahr</span><span lang="en">Year</span></dt><dd>[Jahr]</dd></div>
-              <div><dt><span lang="de">Ort</span><span lang="en">Location</span></dt><dd>Schaan</dd></div>
-              <div><dt><span lang="de">Typ</span><span lang="en">Type</span></dt><dd>[Typ]</dd></div>
+              <div><dt><span lang="de">Jahr</span><span lang="en">Year</span></dt><dd>1928</dd></div>
+              <div><dt><span lang="de">Ort</span><span lang="en">Location</span></dt><dd>Bettlerjoch, Malbun</dd></div>
+              <div><dt><span lang="de">Typ</span><span lang="en">Type</span></dt><dd><span lang="de">Berghütte</span><span lang="en">Mountain hut</span></dd></div>
             </dl>
-            <p lang="de">[Kurzbeschreibung, 2–3 Sätze: Bauherr, Besonderheit, Bedeutung.]</p>
-            <p lang="en">[Short story, 2–3 sentences: client, distinctive feature, significance.]</p>
+            <p lang="de">Auf über 2’100 Metern zeigt Sommerlad, dass Moderne und Hochgebirge zusammengehen: kompakter Baukörper, robuste Materialien, ein Haus, das dem Wetter standhält.</p>
+            <p lang="en">At over 2,100 metres Sommerlad proves modernism belongs in the high Alps: a compact volume, robust materials, a house built to stand up to the weather.</p>
           </article>
-          <article class="story-item" data-img="assets/work-03.jpg" data-tag="[Typ]">
+          <article class="story-item" data-img="assets/work-03-elektrizitaetswerk.jpg" data-tag="Infrastruktur">
             <div class="story-count"><b>03</b> / <span class="total">05</span></div>
-            <h3 class="title">[Werk 03]</h3>
+            <h3 class="title">Landeswerk Vaduz</h3>
             <dl class="meta">
-              <div><dt><span lang="de">Jahr</span><span lang="en">Year</span></dt><dd>[Jahr]</dd></div>
+              <div><dt><span lang="de">Jahr</span><span lang="en">Year</span></dt><dd>1927</dd></div>
               <div><dt><span lang="de">Ort</span><span lang="en">Location</span></dt><dd>Vaduz</dd></div>
-              <div><dt><span lang="de">Typ</span><span lang="en">Type</span></dt><dd>[Typ]</dd></div>
+              <div><dt><span lang="de">Typ</span><span lang="en">Type</span></dt><dd><span lang="de">Industriebau</span><span lang="en">Industrial</span></dd></div>
             </dl>
-            <p lang="de">[Kurzbeschreibung, 2–3 Sätze.]</p>
-            <p lang="en">[Short story, 2–3 sentences.]</p>
+            <p lang="de">Das staatliche Elektrizitätswerk gehört zu seinen frühesten Bauten im Land – Architektur als Zeichen eines Kleinstaats, der sich modernisiert.</p>
+            <p lang="en">The state electricity works is among his earliest buildings in the country – architecture as the signature of a small state modernising itself.</p>
           </article>
-          <article class="story-item" data-img="assets/work-04.jpg" data-tag="[Typ]">
+          <article class="story-item" data-img="assets/work-04-villenquartier.jpg" data-tag="Quartier">
             <div class="story-count"><b>04</b> / <span class="total">05</span></div>
-            <h3 class="title">[Werk 04]</h3>
+            <h3 class="title">Villenquartier Ebenholz</h3>
             <dl class="meta">
-              <div><dt><span lang="de">Jahr</span><span lang="en">Year</span></dt><dd>[Jahr]</dd></div>
-              <div><dt><span lang="de">Ort</span><span lang="en">Location</span></dt><dd>St. Gallen</dd></div>
-              <div><dt><span lang="de">Typ</span><span lang="en">Type</span></dt><dd>[Typ]</dd></div>
+              <div><dt><span lang="de">Jahr</span><span lang="en">Year</span></dt><dd><span lang="de">ab 1926</span><span lang="en">from 1926</span></dd></div>
+              <div><dt><span lang="de">Ort</span><span lang="en">Location</span></dt><dd>Vaduz</dd></div>
+              <div><dt><span lang="de">Typ</span><span lang="en">Type</span></dt><dd><span lang="de">Städtebau</span><span lang="en">Urban plan</span></dd></div>
             </dl>
-            <p lang="de">[Kurzbeschreibung, 2–3 Sätze.]</p>
-            <p lang="en">[Short story, 2–3 sentences.]</p>
+            <p lang="de">Sommerlad plante das Vaduzer Villenquartier und baute dort Haus um Haus – ein ganzes Stadtviertel als Lehrstück des Neuen Bauens.</p>
+            <p lang="en">Sommerlad planned the Vaduz villa district and built it house by house – an entire neighbourhood as a lesson in Neues Bauen.</p>
           </article>
-          <article class="story-item" data-img="assets/work-05.jpg" data-tag="[Typ]">
+          <article class="story-item" data-img="assets/work-05-fuerst-johannes-strasse.jpg" data-tag="Wohnhaus">
             <div class="story-count"><b>05</b> / <span class="total">05</span></div>
-            <h3 class="title">[Werk 05]</h3>
+            <h3 class="title">Haus Fürst-Johannes-Strasse</h3>
             <dl class="meta">
-              <div><dt><span lang="de">Jahr</span><span lang="en">Year</span></dt><dd>[Jahr]</dd></div>
-              <div><dt><span lang="de">Ort</span><span lang="en">Location</span></dt><dd>Vorarlberg</dd></div>
-              <div><dt><span lang="de">Typ</span><span lang="en">Type</span></dt><dd>[Typ]</dd></div>
+              <div><dt><span lang="de">Jahr</span><span lang="en">Year</span></dt><dd>1934</dd></div>
+              <div><dt><span lang="de">Ort</span><span lang="en">Location</span></dt><dd>Vaduz</dd></div>
+              <div><dt><span lang="de">Typ</span><span lang="en">Type</span></dt><dd><span lang="de">Wohnhaus</span><span lang="en">Residence</span></dd></div>
             </dl>
-            <p lang="de">[Kurzbeschreibung, 2–3 Sätze.]</p>
-            <p lang="en">[Short story, 2–3 sentences.]</p>
+            <p lang="de">Klare Kuben, grosse Fenster, präzise Proportionen: ein Wohnhaus, das zeigt, wie selbstverständlich die Moderne in Vaduz angekommen war.</p>
+            <p lang="en">Clean volumes, generous windows, precise proportions: a house showing how naturally modernism had arrived in Vaduz.</p>
           </article>
         </div>
         <div class="deck-ctrl">
@@ -485,6 +498,21 @@ h3{font:500 13px/1.3 var(--f-sans);letter-spacing:.2em;text-transform:uppercase;
         </div>
       </div>
     </div>
+
+    <!-- Gallery teaser: the other 251 works live on the gallery page (out of scope for this quote) -->
+    <a class="gallery-cta reveal" href="/werke/">
+      <span class="gallery-thumbs" aria-hidden="true">
+        <span class="media"><img src="assets/gallery-01.jpg" alt="" onerror="this.remove()"></span>
+        <span class="media"><img src="assets/gallery-02.jpg" alt="" onerror="this.remove()"></span>
+        <span class="media"><img src="assets/gallery-03.jpg" alt="" onerror="this.remove()"></span>
+        <span class="media"><img src="assets/gallery-04.jpg" alt="" onerror="this.remove()"></span>
+      </span>
+      <span class="gallery-text">
+        <b>+251</b>
+        <span><span lang="de">weitere Werke in Liechtenstein, der Schweiz und Vorarlberg</span><span lang="en">more works across Liechtenstein, Switzerland and Vorarlberg</span></span>
+      </span>
+      <span class="btn"><span lang="de">Zur Galerie</span><span lang="en">Open gallery</span> <span aria-hidden="true">→</span></span>
+    </a>
   </div>
 </section>
 
@@ -503,19 +531,19 @@ h3{font:500 13px/1.3 var(--f-sans);letter-spacing:.2em;text-transform:uppercase;
         <a class="more" href="https://www.park-books.com/produkt/ernst-sommerlad-architekt-1895-1977/1685" target="_blank" rel="noopener"><span lang="de">Zum Verlag</span><span lang="en">View at publisher</span></a>
       </article>
       <article class="pub reveal">
-        <div class="media cover c2" data-label="[Titel Publikation 02]"><img src="assets/pub-02.jpg" alt="" onerror="this.remove()"></div>
-        <span class="kind"><span lang="de">Ausstellung</span><span lang="en">Exhibition</span> · [Jahr]</span>
-        <h4>[Titel Publikation 02]</h4>
-        <p lang="de">[Kurzbeschreibung.]</p>
-        <p lang="en">[Short description.]</p>
+        <div class="media cover c2" data-label="Haus Zickert. Ernst Sommerlad"><img src="assets/pub-02.jpg" alt="" onerror="this.remove()"></div>
+        <span class="kind"><span lang="de">Buch</span><span lang="en">Book</span> · 2018</span>
+        <h4>Haus Zickert. Ernst Sommerlad</h4>
+        <p lang="de">Die Geschichte des Viertelkreishauses und seiner Renovation – vom Entwurf bis zur Wiedergeburt 2017.</p>
+        <p lang="en">The story of the quarter-circle house and its renovation – from first sketch to its revival in 2017.</p>
         <a class="more" href="#"><span lang="de">Mehr erfahren</span><span lang="en">Learn more</span></a>
       </article>
       <article class="pub reveal">
-        <div class="media cover c3" data-label="[Titel Publikation 03]"><img src="assets/pub-03.jpg" alt="" onerror="this.remove()"></div>
-        <span class="kind"><span lang="de">Artikel</span><span lang="en">Article</span> · [Jahr]</span>
-        <h4>[Titel Publikation 03]</h4>
-        <p lang="de">[Kurzbeschreibung.]</p>
-        <p lang="en">[Short description.]</p>
+        <div class="media cover c3" data-label="130 Jahre Sommerlad"><img src="assets/pub-03.jpg" alt="" onerror="this.remove()"></div>
+        <span class="kind"><span lang="de">Ausstellung &amp; Führungen</span><span lang="en">Exhibition &amp; tours</span> · 2025</span>
+        <h4>130 Jahre Sommerlad</h4>
+        <p lang="de">Jubiläumsprogramm zum 130. Geburtstag: Ausstellung, Vorträge und Architekturführungen durch Ebenholz und Mühleholz.</p>
+        <p lang="en">Anniversary programme for his 130th birthday: exhibition, talks and architecture walks through Ebenholz and Mühleholz.</p>
         <a class="more" href="#"><span lang="de">Mehr erfahren</span><span lang="en">Learn more</span></a>
       </article>
     </div>
@@ -529,13 +557,13 @@ h3{font:500 13px/1.3 var(--f-sans);letter-spacing:.2em;text-transform:uppercase;
       <div>
         <p class="eyebrow reveal" style="color:var(--ochre)"><span lang="de">Kontakt</span><span lang="en">Contact</span></p>
         <h2 class="h-section reveal"><span lang="de">Archiv, Forschung &amp; <em>Anfragen</em>.</span><span lang="en">Archive, research &amp; <em>enquiries</em>.</span></h2>
-        <!-- [PLACEHOLDER] confirm address / email / phone -->
+        <!-- Sample contact details -->
         <address class="reveal">
           <h3>Stiftung Sommerlad</h3>
-          [Strasse Nr.]<br>
+          Städtle 1<br>
           9490 Vaduz, Liechtenstein<br><br>
           <a href="mailto:info@sommerlad.li">info@sommerlad.li</a><br>
-          <a href="tel:+423000000">+423 [000 00 00]</a>
+          <a href="tel:+423000000">+423 230 00 00</a>
         </address>
       </div>
       <form class="form reveal" onsubmit="event.preventDefault();this.querySelector('.btn').textContent='✓';">
