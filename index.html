@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="de" data-lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stiftung Sommerlad</title>
+<meta name="description" content="Stiftung Sommerlad — Preserving the legacy of Liechtenstein's most important architect, Ernst Sommerlad (1895–1977).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<!--
+  ============================================================
+  STIFTUNG SOMMERLAD — HOMEPAGE REVAMP (design reference)
+  ------------------------------------------------------------
+  WordPress build target: GeneratePress (free) + GenerateBlocks
+  (or Blocksy + native Gutenberg). Every section below is marked
+  with its WP equivalent in a "WP:" comment.
+
+  IMAGES: drop real photos into /assets with the file names used
+  in the src attributes. Missing files fall back to a styled
+  placeholder automatically, so the layout never breaks.
+
+  CONTENT marked [PLACEHOLDER] must be replaced with verified
+  text from the Stiftung before showing to the client.
+  ============================================================
+-->
+<style>
+/* ---------- Design tokens (map 1:1 to GeneratePress Global Colors / Blocksy palette) ---------- */
+:root{
+  --paper:#F8F5F0;        /* base */
+  --paper-2:#EFEAE2;      /* alt section */
+  --ink:#2A2A2A;          /* anthracite primary */
+  --ink-2:#4A4744;        /* body text */
+  --ink-3:#8A847C;        /* muted */
+  --line:#D9D2C7;
+  --red:#B5451B;          /* architectural red (primary accent) */
+  --ochre:#C9962A;        /* ochre (secondary accent, sparing) */
+  --dark:#1E1E1E;
+
+  --f-display:"Cormorant Garamond", Georgia, serif;
+  --f-sans:"Jost", "Futura", "Helvetica Neue", Arial, sans-serif;
+
+  --gutter:clamp(16px, 4vw, 56px);
+  --max:1320px;
+  --ease:cubic-bezier(.2,.7,.1,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink-2);font:300 17px/1.7 var(--f-sans);overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
+
+/* Language toggle: show only active language */
+[data-lang="de"] [lang="en"]:not(html),
+[data-lang="en"] [lang="de"]:not(html){display:none!important}
+
+/* ---------- Type ---------- */
+.eyebrow{font:500 12px/1 var(--f-sans);letter-spacing:.28em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:14px;margin:0 0 28px}
+.eyebrow::before{content:"";width:36px;height:1px;background:currentColor}
+.h-section{font:400 clamp(40px,5.4vw,76px)/1.02 var(--f-display);color:var(--ink);margin:0 0 32px;letter-spacing:-.01em}
+.h-section em{font-style:italic;color:var(--red)}
+h3{font:500 13px/1.3 var(--f-sans);letter-spacing:.2em;text-transform:uppercase;color:var(--ink);margin:0 0 12px}
+
+/* ---------- Placeholder for missing images ---------- */
+.media{position:relative;overflow:hidden;background:
+  linear-gradient(180deg,rgba(0,0,0,0) 55%,rgba(0,0,0,.25)),
+  repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 1px,transparent 1px 80px),
+  repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 80px),
+  linear-gradient(135deg,#3a3734,#24221f)}
+.media::before{ /* abstract flat-roof-with-eaves silhouette — a nod to Haus Zickert */
+  content:"";position:absolute;left:18%;right:18%;bottom:22%;height:34%;
+  background:linear-gradient(#8f877c,#8f877c) top/100% 6% no-repeat,
+             linear-gradient(90deg,transparent 8%,#5d5851 8% 92%,transparent 92%) bottom/100% 94% no-repeat;
+  opacity:.35}
+.media::after{content:attr(data-label);position:absolute;left:16px;bottom:14px;font:500 10px/1.3 var(--f-sans);letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.45);max-width:calc(100% - 32px)}
+.media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+
+/* ---------- Header / Nav ---------- */
+/* WP: GeneratePress Header Element (transparent/sticky) + Primary Menu + Polylang language switcher */
+.site-header{position:fixed;inset:0 0 auto;z-index:50;color:#fff;transition:background .4s var(--ease),color .4s,box-shadow .4s}
+.site-header .wrap{display:flex;align-items:center;justify-content:space-between;height:84px;transition:height .4s var(--ease)}
+.site-header.is-solid{background:rgba(248,245,240,.94);backdrop-filter:blur(10px);color:var(--ink);box-shadow:0 1px 0 var(--line)}
+.site-header.is-solid .wrap{height:68px}
+.brand{display:flex;flex-direction:column;text-decoration:none;line-height:1}
+.brand b{font:500 14px/1 var(--f-sans);letter-spacing:.32em;text-transform:uppercase}
+.brand span{font:italic 400 15px/1 var(--f-display);opacity:.75;margin-top:6px}
+.nav{display:flex;align-items:center;gap:36px}
+.nav ul{display:flex;gap:32px;list-style:none;margin:0;padding:0}
+.nav a{text-decoration:none;font:400 13px/1 var(--f-sans);letter-spacing:.16em;text-transform:uppercase;position:relative;padding:6px 0}
+.nav ul a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;background:var(--red);transition:right .35s var(--ease)}
+.nav ul a:hover::after{right:0}
+.lang{display:flex;border:1px solid currentColor;border-radius:999px;padding:3px;opacity:.9}
+.lang button{font:500 11px/1 var(--f-sans);letter-spacing:.14em;padding:7px 11px;border-radius:999px;transition:background .3s,color .3s}
+.lang button[aria-pressed="true"]{background:var(--red);color:#fff}
+.burger{display:none;width:28px;height:18px;position:relative}
+.burger span,.burger::before,.burger::after{content:"";position:absolute;left:0;right:0;height:1.5px;background:currentColor;transition:transform .3s,opacity .3s}
+.burger::before{top:0}.burger span{top:8px}.burger::after{bottom:0}
+.nav-open .burger::before{transform:translateY(8px) rotate(45deg)}
+.nav-open .burger span{opacity:0}
+.nav-open .burger::after{transform:translateY(-8px) rotate(-45deg)}
+
+/* ---------- Hero slideshow ---------- */
+/* WP: GenerateBlocks Container (full width, 100vh) + Smart Slider 3 / MetaSlider OR the vanilla JS below enqueued via child theme */
+.hero{position:relative;height:100vh;height:100svh;min-height:560px;color:#fff;overflow:hidden;background:var(--dark)}
+.hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.6s ease}
+.hero-slide.is-active{opacity:1}
+.hero-slide .media{position:absolute;inset:0}
+.hero-slide .media img,.hero-slide .media::before{transform:scale(1.12);transition:transform 9s linear}
+.hero-slide.is-active .media img,.hero-slide.is-active .media::before{transform:scale(1)}
+.hero::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:linear-gradient(180deg,rgba(20,20,20,.55) 0,rgba(20,20,20,0) 28%,rgba(20,20,20,0) 45%,rgba(20,20,20,.78) 100%)}
+.hero-copy{position:absolute;z-index:3;left:0;right:0;bottom:clamp(96px,14vh,150px)}
+.hero-kicker{font:500 12px/1 var(--f-sans);letter-spacing:.32em;text-transform:uppercase;color:var(--ochre);margin:0 0 22px}
+.hero h1{font:400 clamp(52px,9.5vw,148px)/.92 var(--f-display);margin:0 0 26px;letter-spacing:-.02em;max-width:12ch}
+.hero h1 em{font-style:italic;color:#e9dfd0}
+.hero-lead{font:300 clamp(17px,1.6vw,22px)/1.5 var(--f-sans);max-width:36ch;margin:0;color:rgba(255,255,255,.88)}
+.hero-bar{position:absolute;z-index:3;left:0;right:0;bottom:34px}
+.hero-bar .wrap{display:flex;align-items:flex-end;justify-content:space-between;gap:24px}
+.hero-caption{font:400 12px/1.5 var(--f-sans);letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.75);min-height:18px}
+.hero-caption b{color:#fff;font-weight:500}
+.hero-dots{display:flex;gap:10px}
+.hero-dots button{width:48px;height:20px;position:relative}
+.hero-dots button::before,.hero-dots button i{content:"";position:absolute;left:0;right:0;top:50%;height:2px;background:rgba(255,255,255,.3)}
+.hero-dots button i{right:100%;background:#fff}
+.hero-dots button.is-active i{animation:fill var(--dur,6.5s) linear forwards}
+@keyframes fill{to{right:0}}
+.scroll-cue{position:absolute;z-index:3;right:var(--gutter);top:50%;writing-mode:vertical-rl;font:500 11px/1 var(--f-sans);letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.7);text-decoration:none;display:flex;align-items:center;gap:14px}
+.scroll-cue::after{content:"";width:1px;height:64px;background:linear-gradient(rgba(255,255,255,.8),transparent);animation:drip 2.2s ease-in-out infinite}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ---------- About ---------- */
+/* WP: GenerateBlocks Grid 50/50, left column full-bleed image (no padding), right column text; Gutenberg Pullquote block */
+.about{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);background:var(--paper)}
+.about-portrait{position:sticky;top:0;height:100vh;height:100svh;min-height:620px}
+.about-portrait .media{position:absolute;inset:0;filter:grayscale(1) contrast(1.05)}
+.about-portrait figcaption{position:absolute;z-index:2;left:var(--gutter);bottom:32px;color:#fff;font:italic 400 18px/1.3 var(--f-display)}
+.about-portrait figcaption small{display:block;font:500 10px/1.6 var(--f-sans);letter-spacing:.22em;text-transform:uppercase;font-style:normal;opacity:.7;margin-top:6px}
+.about-body{padding:clamp(80px,12vh,140px) var(--gutter) clamp(80px,12vh,140px) clamp(32px,6vw,96px);max-width:760px}
+.about-intro{font:400 clamp(22px,2vw,28px)/1.45 var(--f-display);color:var(--ink);margin:0 0 56px}
+.chapter{display:grid;grid-template-columns:72px 1fr;gap:0 20px;padding:32px 0;border-top:1px solid var(--line)}
+.chapter .num{font:400 34px/1 var(--f-display);color:var(--red);font-style:italic}
+.chapter p{margin:0}
+.pullquote{margin:56px 0;padding:0 0 0 32px;border-left:3px solid var(--red)}
+.pullquote p{font:italic 400 clamp(28px,2.8vw,40px)/1.2 var(--f-display);color:var(--ink);margin:0 0 18px}
+.pullquote cite{font:500 11px/1 var(--f-sans);letter-spacing:.22em;text-transform:uppercase;font-style:normal;color:var(--ink-3)}
+
+/* ---------- Stats band ---------- */
+/* WP: GenerateBlocks Grid (4 cols) inside a dark Container */
+.stats{background:var(--ink);color:#fff}
+.stats ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr)}
+.stats li{padding:clamp(40px,6vw,72px) clamp(16px,2.6vw,36px);border-left:1px solid rgba(255,255,255,.12)}
+.stats li:first-child{border-left:0}
+.stats .n{display:block;font:400 clamp(52px,6.4vw,92px)/1 var(--f-display);color:#fff;letter-spacing:-.02em}
+.stats .n sup{font-size:.4em;color:var(--ochre);vertical-align:top;margin-left:4px}
+.stats .l{display:block;margin-top:14px;font:400 12px/1.5 var(--f-sans);letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+
+/* ---------- Works (stacked deck + story) ---------- */
+/* WP: custom post type "werk" (CPT UI + ACF: year, location, typology, gallery) rendered with GenerateBlocks Query Loop; deck behaviour via small JS */
+.works{padding:clamp(96px,14vh,160px) 0;background:var(--paper-2);overflow:hidden}
+.works-head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;margin-bottom:clamp(40px,6vh,72px)}
+.works-head .h-section{margin:0}
+.works-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(40px,7vw,110px);align-items:center}
+.deck{position:relative;aspect-ratio:4/5;width:min(88%,calc(72vh*.8));margin:48px auto 0 0;perspective:1400px;touch-action:pan-y}
+.card{position:absolute;inset:0;transition:transform .9s var(--ease),opacity .9s var(--ease),filter .9s;will-change:transform;cursor:pointer;box-shadow:0 30px 60px -30px rgba(30,25,20,.45)}
+.card .media{position:absolute;inset:0}
+.card .media img{transition:transform 1.2s var(--ease)}
+.card.is-front{cursor:zoom-in}
+.card.is-front:hover .media img{transform:scale(1.07)}
+.card .tag{position:absolute;z-index:2;top:16px;left:16px;background:var(--paper);color:var(--ink);font:500 10px/1 var(--f-sans);letter-spacing:.22em;text-transform:uppercase;padding:8px 10px}
+.card .zoom{position:absolute;z-index:2;right:16px;bottom:16px;width:44px;height:44px;border-radius:50%;background:rgba(248,245,240,.92);color:var(--ink);display:grid;place-items:center;opacity:0;transform:scale(.8);transition:.4s var(--ease)}
+.card.is-front .zoom{opacity:1;transform:none}
+.story{position:relative;min-height:440px}
+.story-item{position:absolute;inset:0 0 auto;opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s var(--ease);pointer-events:none}
+.story-item.is-active{position:relative;opacity:1;transform:none;pointer-events:auto}
+.story-count{font:400 14px/1 var(--f-sans);letter-spacing:.2em;color:var(--ink-3);margin-bottom:28px}
+.story-count b{color:var(--red);font-weight:500;font-size:20px}
+.story h3.title{font:400 clamp(36px,3.6vw,54px)/1.04 var(--f-display);text-transform:none;letter-spacing:-.01em;margin:0 0 24px}
+.meta{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:8px 36px;padding:20px 0;margin:0 0 24px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.meta dt{font:500 10px/1 var(--f-sans);letter-spacing:.22em;text-transform:uppercase;color:var(--ink-3);margin-bottom:8px}
+.meta dd{margin:0;font:400 16px/1.3 var(--f-sans);color:var(--ink)}
+.deck-ctrl{display:flex;align-items:center;gap:12px;margin-top:36px}
+.circle{width:56px;height:56px;border-radius:50%;border:1px solid var(--ink);display:grid;place-items:center;transition:background .3s,color .3s}
+.circle:hover{background:var(--ink);color:var(--paper)}
+.btn{display:inline-flex;align-items:center;gap:14px;text-decoration:none;font:500 12px/1 var(--f-sans);letter-spacing:.22em;text-transform:uppercase;padding:20px 28px;background:var(--red);color:#fff;transition:background .3s,gap .3s}
+.btn:hover{background:#962f0e;gap:20px}
+.btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+.btn-ghost:hover{background:var(--ink);color:var(--paper)}
+
+/* Lightbox */
+.lightbox{position:fixed;inset:0;z-index:100;background:rgba(20,20,20,.94);display:grid;place-items:center;padding:var(--gutter);opacity:0;pointer-events:none;transition:opacity .4s}
+.lightbox.is-open{opacity:1;pointer-events:auto}
+.lightbox .media{width:min(1100px,100%);aspect-ratio:3/2;transform:scale(.94);transition:transform .5s var(--ease)}
+.lightbox.is-open .media{transform:none}
+.lightbox .close{position:absolute;top:20px;right:24px;color:#fff;font:300 40px/1 var(--f-sans)}
+.lightbox p{color:rgba(255,255,255,.8);font:400 13px/1 var(--f-sans);letter-spacing:.18em;text-transform:uppercase;margin:20px 0 0;text-align:center}
+
+/* ---------- Publications ---------- */
+/* WP: CPT "publikation" or simple Query Loop on a category; GenerateBlocks Grid 3 cols */
+.pubs{padding:clamp(96px,14vh,160px) 0}
+.pubs-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(24px,3vw,48px);margin-top:16px}
+.pub{display:flex;flex-direction:column}
+.pub .cover{aspect-ratio:3/4;margin-bottom:24px;transition:transform .6s var(--ease),box-shadow .6s;box-shadow:0 20px 40px -24px rgba(30,25,20,.5)}
+.pub:hover .cover{transform:translateY(-8px);box-shadow:0 34px 50px -26px rgba(30,25,20,.55)}
+.pub .cover.c1{background:var(--red)}.pub .cover.c2{background:var(--ink)}.pub .cover.c3{background:var(--ochre)}
+.pub .cover::before{display:none}
+.pub .cover::after{content:attr(data-label);left:24px;right:24px;bottom:24px;color:rgba(255,255,255,.92);font:400 26px/1.1 var(--f-display);letter-spacing:0;text-transform:none}
+.pub .kind{font:500 10px/1 var(--f-sans);letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:10px}
+.pub h4{font:400 26px/1.15 var(--f-display);color:var(--ink);margin:0 0 10px}
+.pub p{margin:0 0 18px;font-size:15px;line-height:1.6}
+.pub a.more{margin-top:auto;font:500 11px/1 var(--f-sans);letter-spacing:.2em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--red);padding-bottom:6px;align-self:flex-start}
+
+/* ---------- Contact + Footer ---------- */
+/* WP: Contact Form 7 / Fluent Forms styled to match; Footer via GeneratePress Footer Widgets or a Block Element */
+.contact{background:var(--ink);color:rgba(255,255,255,.75);padding:clamp(96px,14vh,160px) 0 0}
+.contact .h-section{color:#fff}
+.contact-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(40px,8vw,120px)}
+.contact address{font-style:normal;font-size:17px;line-height:1.9}
+.contact address a{text-decoration:none;border-bottom:1px solid rgba(255,255,255,.25)}
+.contact address a:hover{border-color:var(--ochre)}
+.contact h3{color:var(--ochre)}
+.form{display:grid;gap:22px}
+.field{position:relative}
+.field input,.field textarea{width:100%;background:transparent;border:0;border-bottom:1px solid rgba(255,255,255,.25);color:#fff;font:300 17px/1.5 var(--f-sans);padding:22px 0 10px;outline:0;resize:vertical;border-radius:0}
+.field textarea{min-height:110px}
+.field label{position:absolute;left:0;top:22px;font:400 12px/1 var(--f-sans);letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5);transition:.3s var(--ease);pointer-events:none}
+.field input:focus,.field textarea:focus{border-color:var(--ochre)}
+.field input:focus+label,.field input:not(:placeholder-shown)+label,
+.field textarea:focus+label,.field textarea:not(:placeholder-shown)+label{top:0;font-size:10px;color:var(--ochre)}
+.form .btn{justify-self:start;margin-top:8px}
+.footer{margin-top:clamp(80px,12vh,140px);border-top:1px solid rgba(255,255,255,.12);padding:28px 0 36px;font:400 12px/1.6 var(--f-sans);letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px 32px}
+.footer nav{display:flex;gap:28px;flex-wrap:wrap}
+.footer a{text-decoration:none}.footer a:hover{color:#fff}
+.giant{font:400 clamp(64px,15vw,240px)/.8 var(--f-display);color:rgba(255,255,255,.06);letter-spacing:-.03em;white-space:nowrap;margin:clamp(48px,8vh,96px) 0 0;user-select:none;overflow:hidden}
+
+/* ---------- Reveal on scroll ---------- */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- Responsive ---------- */
+@media (max-width:980px){
+  .nav ul{display:none}
+  .nav{gap:20px}
+  .burger{display:block}
+  .nav-open .site-header{background:var(--ink);color:#fff}
+  .nav-open .nav ul{display:flex;position:fixed;inset:68px 0 auto;flex-direction:column;gap:0;background:var(--ink);padding:12px var(--gutter) 28px}
+  .nav-open .nav ul a{display:block;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.1);font-size:15px}
+  .about{grid-template-columns:1fr}
+  .about-portrait{position:relative;height:78vh;min-height:460px}
+  .about-body{padding:72px var(--gutter);max-width:none}
+  .stats ul{grid-template-columns:repeat(2,1fr)}
+  .stats li:nth-child(3){border-left:0}
+  .stats li:nth-child(n+3){border-top:1px solid rgba(255,255,255,.12)}
+  .works-grid{grid-template-columns:1fr}
+  .deck{width:min(86%,460px);margin:24px 0 0}
+  .story{min-height:0}
+  .pubs-grid{grid-template-columns:1fr 1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .scroll-cue{display:none}
+}
+@media (max-width:620px){
+  .works-head{flex-direction:column;align-items:flex-start}
+  .pubs-grid{grid-template-columns:1fr;gap:56px}
+  .pub .cover{width:62%}
+  .chapter{grid-template-columns:48px 1fr}
+  .meta{grid-template-columns:1fr 1fr}
+  .hero-caption{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="site-header" id="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Stiftung Sommerlad">
+      <b>Sommerlad</b>
+      <span>Stiftung · Vaduz</span>
+    </a>
+    <nav class="nav" aria-label="Hauptnavigation">
+      <ul>
+        <li><a href="#about"><span lang="de">Der Architekt</span><span lang="en">The Architect</span></a></li>
+        <li><a href="#works"><span lang="de">Werke</span><span lang="en">Works</span></a></li>
+        <li><a href="#publications"><span lang="de">Publikationen</span><span lang="en">Publications</span></a></li>
+        <li><a href="#contact"><span lang="de">Kontakt</span><span lang="en">Contact</span></a></li>
+      </ul>
+      <div class="lang" role="group" aria-label="Sprache / Language">
+        <button type="button" data-set-lang="de" aria-pressed="true">DE</button>
+        <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <button class="burger" type="button" aria-label="Menü" aria-expanded="false"><span></span></button>
+    </nav>
+  </div>
+</header>
+
+<main>
+<!-- ================= HERO ================= -->
+<section class="hero" aria-label="Stiftung Sommerlad">
+  <!-- Slide 1 = his signature building. Recommend Haus Zickert, Vaduz (1932/33). -->
+  <div class="hero-slide is-active" data-cap-de="<b>Haus Zickert</b> · Vaduz · 1932/33" data-cap-en="<b>Haus Zickert</b> · Vaduz · 1932/33">
+    <div class="media" data-label=""><img src="assets/hero-01-haus-zickert.jpg" alt="Haus Zickert, Vaduz, 1932/33" onerror="this.remove()"></div>
+  </div>
+  <div class="hero-slide" data-cap-de="<b>[Werk 02]</b> · [Ort] · [Jahr]" data-cap-en="<b>[Work 02]</b> · [Place] · [Year]">
+    <div class="media"><img src="assets/hero-02.jpg" alt="" onerror="this.remove()"></div>
+  </div>
+  <div class="hero-slide" data-cap-de="<b>[Werk 03]</b> · [Ort] · [Jahr]" data-cap-en="<b>[Work 03]</b> · [Place] · [Year]">
+    <div class="media"><img src="assets/hero-03.jpg" alt="" onerror="this.remove()"></div>
+  </div>
+
+  <div class="hero-copy">
+    <div class="wrap">
+      <p class="hero-kicker">Ernst Sommerlad · 1895–1977</p>
+      <h1>Stiftung <em>Sommerlad</em></h1>
+      <p class="hero-lead">
+        <span lang="de">Wir bewahren das Erbe des bedeutendsten Architekten Liechtensteins.</span>
+        <span lang="en">Preserving the legacy of Liechtenstein’s most important architect.</span>
+      </p>
+    </div>
+  </div>
+  <div class="hero-bar">
+    <div class="wrap">
+      <p class="hero-caption" aria-live="polite"></p>
+      <div class="hero-dots" role="tablist" aria-label="Slides"></div>
+    </div>
+  </div>
+  <a class="scroll-cue" href="#about"><span lang="de">Entdecken</span><span lang="en">Discover</span></a>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section class="about" id="about">
+  <figure class="about-portrait" style="margin:0">
+    <div class="media" data-label="Portrait Ernst Sommerlad — Archiv"><img src="assets/portrait-ernst-sommerlad.jpg" alt="Ernst Sommerlad, Portrait" onerror="this.remove()"></div>
+    <figcaption>Ernst Sommerlad<small>Architekt · 1895–1977</small></figcaption>
+  </figure>
+
+  <div class="about-body">
+    <p class="eyebrow reveal"><span lang="de">Der Architekt</span><span lang="en">The Architect</span></p>
+    <h2 class="h-section reveal"><span lang="de">Der Mann, der die <em>Moderne</em> nach Liechtenstein brachte.</span><span lang="en">The man who brought <em>modernism</em> to Liechtenstein.</span></h2>
+    <p class="about-intro reveal">
+      <span lang="de">Als erster akademisch ausgebildeter Architekt des Landes prägte Ernst Sommerlad über ein halbes Jahrhundert das Bild des Fürstentums – und der angrenzenden Regionen.</span>
+      <span lang="en">As the country’s first university-trained architect, Ernst Sommerlad shaped the face of the Principality – and its neighbouring regions – for half a century.</span>
+    </p>
+
+    <div class="chapter reveal">
+      <span class="num">01</span>
+      <div>
+        <h3><span lang="de">Frühe Jahre</span><span lang="en">Early Life</span></h3>
+        <p lang="de">Geboren 1895 im hessischen Ziegenberg, studierte Sommerlad an der Technischen Hochschule Darmstadt.</p>
+        <p lang="en">Born in 1895 in Ziegenberg, Hesse, Sommerlad trained at the Technische Hochschule Darmstadt.</p>
+      </div>
+    </div>
+    <div class="chapter reveal">
+      <span class="num">02</span>
+      <div>
+        <h3><span lang="de">Bauhaus &amp; Neues Bauen</span><span lang="en">Bauhaus Influence</span></h3>
+        <p lang="de">Als Pionier des Neuen Bauens übersetzte er die internationale Moderne in die alpine Landschaft – Flachdach, klare Kuben, aber nie ohne den Bezug zur lokalen Bautradition.</p>
+        <p lang="en">A pioneer of Neues Bauen, he translated international modernism into the Alpine landscape – flat roofs and clean volumes, never without a nod to local building tradition.</p>
+      </div>
+    </div>
+    <div class="chapter reveal">
+      <span class="num">03</span>
+      <div>
+        <h3>Liechtenstein</h3>
+        <p lang="de">Im Frühjahr 1924 kam er ins Fürstentum, gründete sein Büro in Schaan und verlegte es später nach Vaduz. Es folgte eine im damals ländlichen Kleinstaat beispiellose Bautätigkeit.</p>
+        <p lang="en">He arrived in the Principality in spring 1924, founded his office in Schaan and later moved it to Vaduz – launching building activity without precedent in what was then a rural Alpine state.</p>
+      </div>
+    </div>
+
+    <blockquote class="pullquote reveal">
+      <!-- [PLACEHOLDER] Replace with a verbatim line from the existing sommerlad.li biography text. -->
+      <p lang="de">„Ein Flachdach – aber nie ohne das schützende Vordach.“</p>
+      <p lang="en">“A flat roof – but never without the sheltering eaves.”</p>
+      <cite><span lang="de">Über Haus Zickert, 1932/33</span><span lang="en">On Haus Zickert, 1932/33</span></cite>
+    </blockquote>
+
+    <div class="chapter reveal">
+      <span class="num">04</span>
+      <div>
+        <h3><span lang="de">Vermächtnis</span><span lang="en">Legacy</span></h3>
+        <p lang="de">Sein Werk erstreckt sich über Liechtenstein, St. Gallen, Appenzell Ausserrhoden, Graubünden und Vorarlberg. Die Stiftung Sommerlad dokumentiert, erforscht und vermittelt dieses Erbe.</p>
+        <p lang="en">His work spans Liechtenstein, St. Gallen, Appenzell Ausserrhoden, Graubünden and Vorarlberg. The Stiftung Sommerlad documents, researches and shares this legacy.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STATS ================= -->
+<section class="stats" aria-label="Kennzahlen">
+  <ul>
+    <li class="reveal"><span class="n" data-count="1895">1895</span><span class="l"><span lang="de">Geboren in Ziegenberg</span><span lang="en">Born in Ziegenberg</span></span></li>
+    <li class="reveal"><span class="n" data-count="1924">1924</span><span class="l"><span lang="de">Ankunft in Liechtenstein</span><span lang="en">Arrived in Liechtenstein</span></span></li>
+    <!-- [VERIFY] Brief says 256; public sources (Park Books, Uni Liechtenstein) say "more than 200". Confirm with Stiftung. -->
+    <li class="reveal"><span class="n" data-count="256">256</span><span class="l"><span lang="de">Bauten</span><span lang="en">Buildings</span></span></li>
+    <li class="reveal"><span class="n" data-count="50">50<sup>+</sup></span><span class="l"><span lang="de">Jahre Schaffen</span><span lang="en">Year career</span></span></li>
+  </ul>
+</section>
+
+<!-- ================= WORKS ================= -->
+<section class="works" id="works">
+  <div class="wrap">
+    <div class="works-head">
+      <div>
+        <p class="eyebrow reveal"><span lang="de">Ausgewählte Werke</span><span lang="en">Selected Works</span></p>
+        <h2 class="h-section reveal"><span lang="de">Moderne, <em>alpin</em> gedacht.</span><span lang="en">Modernism, <em>Alpine</em> by nature.</span></h2>
+      </div>
+      <!-- Links to the Gallery/Werke archive page (out of scope for this quote) -->
+      <a class="btn btn-ghost reveal" href="/werke/"><span lang="de">Alle Werke</span><span lang="en">See all works</span> <span aria-hidden="true">→</span></a>
+    </div>
+
+    <div class="works-grid">
+      <div class="deck" aria-roledescription="carousel" aria-label="Werke">
+        <!-- Cards are generated from the .story-item list below so content lives in one place (= one WP Query Loop) -->
+      </div>
+
+      <div>
+        <div class="story" aria-live="polite">
+          <!-- WORK 1 — verified -->
+          <article class="story-item is-active" data-img="assets/work-01-haus-zickert.jpg" data-tag="Wohnhaus">
+            <div class="story-count"><b>01</b> / <span class="total">05</span></div>
+            <h3 class="title">Haus Zickert</h3>
+            <dl class="meta">
+              <div><dt><span lang="de">Jahr</span><span lang="en">Year</span></dt><dd>1932/33</dd></div>
+              <div><dt><span lang="de">Ort</span><span lang="en">Location</span></dt><dd>Vaduz</dd></div>
+              <div><dt><span lang="de">Typ</span><span lang="en">Type</span></dt><dd><span lang="de">Wohnhaus</span><span lang="en">Residence</span></dd></div>
+            </dl>
+            <p lang="de">Das „Viertelkreishaus“ für den Financier Dr. Hermann Zickert gilt als Ikone des Neuen Bauens in Liechtenstein. Das Flachdach sorgte damals für Diskussionen – Sommerlad verzichtete dennoch nicht auf das traditionelle Vordach.</p>
+            <p lang="en">The “quarter-circle house”, built for financier Dr Hermann Zickert, is an icon of modern building in Liechtenstein. Its flat roof sparked debate at the time – yet Sommerlad kept the traditional eaves.</p>
+          </article>
+          <!-- WORKS 2–5 — [PLACEHOLDER] fill from sommerlad.li/projekte/ -->
+          <article class="story-item" data-img="assets/work-02.jpg" data-tag="[Typ]">
+            <div class="story-count"><b>02</b> / <span class="total">05</span></div>
+            <h3 class="title">[Werk 02]</h3>
+            <dl class="meta">
+              <div><dt><span lang="de">Jahr</span><span lang="en">Year</span></dt><dd>[Jahr]</dd></div>
+              <div><dt><span lang="de">Ort</span><span lang="en">Location</span></dt><dd>Schaan</dd></div>
+              <div><dt><span lang="de">Typ</span><span lang="en">Type</span></dt><dd>[Typ]</dd></div>
+            </dl>
+            <p lang="de">[Kurzbeschreibung, 2–3 Sätze: Bauherr, Besonderheit, Bedeutung.]</p>
+            <p lang="en">[Short story, 2–3 sentences: client, distinctive feature, significance.]</p>
+          </article>
+          <article class="story-item" data-img="assets/work-03.jpg" data-tag="[Typ]">
+            <div class="story-count"><b>03</b> / <span class="total">05</span></div>
+            <h3 class="title">[Werk 03]</h3>
+            <dl class="meta">
+              <div><dt><span lang="de">Jahr</span><span lang="en">Year</span></dt><dd>[Jahr]</dd></div>
+              <div><dt><span lang="de">Ort</span><span lang="en">Location</span></dt><dd>Vaduz</dd></div>
+              <div><dt><span lang="de">Typ</span><span lang="en">Type</span></dt><dd>[Typ]</dd></div>
+            </dl>
+            <p lang="de">[Kurzbeschreibung, 2–3 Sätze.]</p>
+            <p lang="en">[Short story, 2–3 sentences.]</p>
+          </article>
+          <article class="story-item" data-img="assets/work-04.jpg" data-tag="[Typ]">
+            <div class="story-count"><b>04</b> / <span class="total">05</span></div>
+            <h3 class="title">[Werk 04]</h3>
+            <dl class="meta">
+              <div><dt><span lang="de">Jahr</span><span lang="en">Year</span></dt><dd>[Jahr]</dd></div>
+              <div><dt><span lang="de">Ort</span><span lang="en">Location</span></dt><dd>St. Gallen</dd></div>
+              <div><dt><span lang="de">Typ</span><span lang="en">Type</span></dt><dd>[Typ]</dd></div>
+            </dl>
+            <p lang="de">[Kurzbeschreibung, 2–3 Sätze.]</p>
+            <p lang="en">[Short story, 2–3 sentences.]</p>
+          </article>
+          <article class="story-item" data-img="assets/work-05.jpg" data-tag="[Typ]">
+            <div class="story-count"><b>05</b> / <span class="total">05</span></div>
+            <h3 class="title">[Werk 05]</h3>
+            <dl class="meta">
+              <div><dt><span lang="de">Jahr</span><span lang="en">Year</span></dt><dd>[Jahr]</dd></div>
+              <div><dt><span lang="de">Ort</span><span lang="en">Location</span></dt><dd>Vorarlberg</dd></div>
+              <div><dt><span lang="de">Typ</span><span lang="en">Type</span></dt><dd>[Typ]</dd></div>
+            </dl>
+            <p lang="de">[Kurzbeschreibung, 2–3 Sätze.]</p>
+            <p lang="en">[Short story, 2–3 sentences.]</p>
+          </article>
+        </div>
+        <div class="deck-ctrl">
+          <button class="circle" type="button" data-deck="prev" aria-label="Zurück / Previous">←</button>
+          <button class="circle" type="button" data-deck="next" aria-label="Weiter / Next">→</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PUBLICATIONS ================= -->
+<section class="pubs" id="publications">
+  <div class="wrap">
+    <p class="eyebrow reveal"><span lang="de">Publikationen</span><span lang="en">Publications</span></p>
+    <h2 class="h-section reveal"><span lang="de">Lesen, <em>forschen</em>, entdecken.</span><span lang="en">Read, <em>research</em>, discover.</span></h2>
+    <div class="pubs-grid">
+      <article class="pub reveal">
+        <div class="media cover c1" data-label="Ernst Sommerlad. Architekt 1895–1977"><img src="assets/pub-01-monografie.jpg" alt="Cover: Ernst Sommerlad. Architekt 1895–1977" onerror="this.remove()"></div>
+        <span class="kind"><span lang="de">Monografie</span><span lang="en">Monograph</span> · Park Books</span>
+        <h4>Ernst Sommerlad. Architekt 1895–1977</h4>
+        <p lang="de">Hrsg. von Marcel Just und der Stiftung Sommerlad. Konzipiert von Dr. Britta Hentschel und Prof. Dr. Katrin Albrecht.</p>
+        <p lang="en">Edited by Marcel Just and the Stiftung Sommerlad. Conceived by Dr Britta Hentschel and Prof. Dr Katrin Albrecht.</p>
+        <a class="more" href="https://www.park-books.com/produkt/ernst-sommerlad-architekt-1895-1977/1685" target="_blank" rel="noopener"><span lang="de">Zum Verlag</span><span lang="en">View at publisher</span></a>
+      </article>
+      <article class="pub reveal">
+        <div class="media cover c2" data-label="[Titel Publikation 02]"><img src="assets/pub-02.jpg" alt="" onerror="this.remove()"></div>
+        <span class="kind"><span lang="de">Ausstellung</span><span lang="en">Exhibition</span> · [Jahr]</span>
+        <h4>[Titel Publikation 02]</h4>
+        <p lang="de">[Kurzbeschreibung.]</p>
+        <p lang="en">[Short description.]</p>
+        <a class="more" href="#"><span lang="de">Mehr erfahren</span><span lang="en">Learn more</span></a>
+      </article>
+      <article class="pub reveal">
+        <div class="media cover c3" data-label="[Titel Publikation 03]"><img src="assets/pub-03.jpg" alt="" onerror="this.remove()"></div>
+        <span class="kind"><span lang="de">Artikel</span><span lang="en">Article</span> · [Jahr]</span>
+        <h4>[Titel Publikation 03]</h4>
+        <p lang="de">[Kurzbeschreibung.]</p>
+        <p lang="en">[Short description.]</p>
+        <a class="more" href="#"><span lang="de">Mehr erfahren</span><span lang="en">Learn more</span></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT + FOOTER ================= -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div>
+        <p class="eyebrow reveal" style="color:var(--ochre)"><span lang="de">Kontakt</span><span lang="en">Contact</span></p>
+        <h2 class="h-section reveal"><span lang="de">Archiv, Forschung &amp; <em>Anfragen</em>.</span><span lang="en">Archive, research &amp; <em>enquiries</em>.</span></h2>
+        <!-- [PLACEHOLDER] confirm address / email / phone -->
+        <address class="reveal">
+          <h3>Stiftung Sommerlad</h3>
+          [Strasse Nr.]<br>
+          9490 Vaduz, Liechtenstein<br><br>
+          <a href="mailto:info@sommerlad.li">info@sommerlad.li</a><br>
+          <a href="tel:+423000000">+423 [000 00 00]</a>
+        </address>
+      </div>
+      <form class="form reveal" onsubmit="event.preventDefault();this.querySelector('.btn').textContent='✓';">
+        <div class="field"><input id="f-name" type="text" placeholder=" " required><label for="f-name"><span lang="de">Name</span><span lang="en">Name</span></label></div>
+        <div class="field"><input id="f-mail" type="email" placeholder=" " required><label for="f-mail">E-Mail</label></div>
+        <div class="field"><textarea id="f-msg" placeholder=" " required></textarea><label for="f-msg"><span lang="de">Nachricht</span><span lang="en">Message</span></label></div>
+        <button class="btn" type="submit"><span lang="de">Senden</span><span lang="en">Send</span> <span aria-hidden="true">→</span></button>
+      </form>
+    </div>
+    <div class="giant" aria-hidden="true">Sommerlad</div>
+  </div>
+  <footer class="footer">
+    <div class="wrap">
+      <span>© <span class="yr">2026</span> Stiftung Sommerlad · Vaduz</span>
+      <nav aria-label="Footer">
+        <a href="/impressum/"><span lang="de">Impressum</span><span lang="en">Imprint</span></a>
+        <a href="/datenschutz/"><span lang="de">Datenschutz</span><span lang="en">Privacy</span></a>
+        <a href="#top"><span lang="de">Nach oben ↑</span><span lang="en">Back to top ↑</span></a>
+      </nav>
+    </div>
+  </footer>
+</section>
+</main>
+
+<div class="lightbox" role="dialog" aria-modal="true" aria-label="Bild" hidden>
+  <button class="close" type="button" aria-label="Schliessen / Close">×</button>
+  <div>
+    <div class="media" data-label=""></div>
+    <p></p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var root=document.documentElement;
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Language toggle (WP: replaced by Polylang/WPML switcher) ---------- */
+  function setLang(l){
+    root.setAttribute('data-lang',l);root.lang=l;
+    document.querySelectorAll('[data-set-lang]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.setLang===l)});
+    try{localStorage.setItem('sommerlad-lang',l)}catch(e){}
+    if(window.__heroCap)window.__heroCap();
+  }
+  document.querySelectorAll('[data-set-lang]').forEach(function(b){b.addEventListener('click',function(){setLang(b.dataset.setLang)})});
+  var saved=null;try{saved=localStorage.getItem('sommerlad-lang')}catch(e){}
+  setLang(saved||((navigator.language||'de').slice(0,2)==='de'?'de':'en'));
+
+  /* ---------- Header state + mobile nav ---------- */
+  var header=document.querySelector('.site-header');
+  function onScroll(){header.classList.toggle('is-solid',window.scrollY>window.innerHeight*.75)}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  var burger=document.querySelector('.burger');
+  burger.addEventListener('click',function(){var o=document.body.classList.toggle('nav-open');burger.setAttribute('aria-expanded',o)});
+  document.querySelectorAll('.nav ul a').forEach(function(a){a.addEventListener('click',function(){document.body.classList.remove('nav-open');burger.setAttribute('aria-expanded',false)})});
+
+  /* ---------- Hero slideshow ---------- */
+  var slides=[].slice.call(document.querySelectorAll('.hero-slide'));
+  var dots=document.querySelector('.hero-dots'),cap=document.querySelector('.hero-caption');
+  var cur=0,DUR=6500,timer;
+  slides.forEach(function(s,i){
+    var b=document.createElement('button');b.type='button';b.setAttribute('role','tab');b.setAttribute('aria-label','Slide '+(i+1));
+    b.style.setProperty('--dur',DUR+'ms');b.appendChild(document.createElement('i'));
+    b.addEventListener('click',function(){go(i)});dots.appendChild(b);
+  });
+  function caption(){var s=slides[cur];cap.innerHTML=s.getAttribute('data-cap-'+root.getAttribute('data-lang'))||''}
+  window.__heroCap=caption;
+  function go(i){
+    slides[cur].classList.remove('is-active');dots.children[cur].classList.remove('is-active');
+    cur=(i+slides.length)%slides.length;
+    slides[cur].classList.add('is-active');
+    var d=dots.children[cur];void d.offsetWidth;d.classList.add('is-active');
+    caption();clearTimeout(timer);if(!reduce)timer=setTimeout(function(){go(cur+1)},DUR);
+  }
+  go(0);
+
+  /* ---------- Works deck ---------- */
+  var deck=document.querySelector('.deck');
+  var items=[].slice.call(document.querySelectorAll('.story-item'));
+  var cards=items.map(function(it,i){
+    var c=document.createElement('div');c.className='card';c.setAttribute('aria-label',it.querySelector('.title').textContent);
+    c.innerHTML='<div class="media" data-label="'+it.querySelector('.title').textContent+'"><img alt="" src="'+it.dataset.img+'" onerror="this.remove()"></div>'+
+      '<span class="tag">'+it.dataset.tag+'</span><span class="zoom" aria-hidden="true">⤢</span>';
+    c.addEventListener('click',function(){ if(i===active) openLB(i); else show(i) });
+    deck.appendChild(c);return c;
+  });
+  var active=0,n=cards.length;
+  function show(i){
+    active=(i+n)%n;
+    cards.forEach(function(c,j){
+      var o=(j-active+n)%n; // 0 = front, 1.. = behind
+      var behind=Math.min(o,3);
+      c.classList.toggle('is-front',o===0);
+      if(o===n-1 && n>3){ // the one just dismissed flies out left
+        c.style.transform='translate3d(-115%,4%,0) rotate(-8deg)';c.style.opacity=0;c.style.zIndex=0;
+      }else{
+        c.style.transform='translate3d('+(behind*6)+'%,'+(-behind*2)+'%,'+(-behind*60)+'px) rotate('+(behind*1.6)+'deg)';
+        c.style.opacity=o>3?0:1;c.style.zIndex=n-o;c.style.filter='brightness('+(1-behind*.12)+')';
+      }
+    });
+    items.forEach(function(it,j){it.classList.toggle('is-active',j===active)});
+  }
+  document.querySelector('[data-deck="prev"]').addEventListener('click',function(){show(active-1)});
+  document.querySelector('[data-deck="next"]').addEventListener('click',function(){show(active+1)});
+  deck.tabIndex=0;
+  deck.addEventListener('keydown',function(e){if(e.key==='ArrowRight')show(active+1);if(e.key==='ArrowLeft')show(active-1);if(e.key==='Enter')openLB(active)});
+  var sx=null;
+  deck.addEventListener('touchstart',function(e){sx=e.touches[0].clientX},{passive:true});
+  deck.addEventListener('touchend',function(e){if(sx===null)return;var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>40)show(active+(dx<0?1:-1));sx=null});
+  show(0);
+
+  /* ---------- Lightbox (WP: core Image block "Expand on click" or a lightbox plugin) ---------- */
+  var lb=document.querySelector('.lightbox'),lbMedia=lb.querySelector('.media'),lbCap=lb.querySelector('p');
+  function openLB(i){
+    var it=items[i];lbMedia.innerHTML='<img alt="" src="'+it.dataset.img+'" onerror="this.remove()">';
+    lbMedia.setAttribute('data-label',it.querySelector('.title').textContent);
+    lbCap.textContent=it.querySelector('.title').textContent+' · '+it.querySelector('.meta dd').textContent;
+    lb.hidden=false;requestAnimationFrame(function(){lb.classList.add('is-open')});lb.querySelector('.close').focus();
+  }
+  function closeLB(){lb.classList.remove('is-open');setTimeout(function(){lb.hidden=true},400);deck.focus()}
+  lb.addEventListener('click',function(e){if(e.target===lb||e.target.classList.contains('close'))closeLB()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!lb.hidden)closeLB()});
+
+  /* ---------- Reveal + count-up ---------- */
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(!e.isIntersecting)return;e.target.classList.add('in');io.unobserve(e.target);
+    var n=e.target.querySelector('[data-count]');if(n&&!reduce)count(n);
+  })},{threshold:.15,rootMargin:'0px 0px -6% 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+  function count(el){
+    var to=+el.dataset.count,from=to>1000?to-60:0,sup=el.querySelector('sup'),t0=null,D=1400;
+    function f(t){t0=t0||t;var p=Math.min((t-t0)/D,1),v=Math.round(from+(to-from)*(1-Math.pow(1-p,3)));
+      el.firstChild.nodeValue=v;if(p<1)requestAnimationFrame(f)}
+    if(el.firstChild.nodeType!==3)el.insertBefore(document.createTextNode(''),el.firstChild);
+    requestAnimationFrame(f);
+  }
+  document.querySelector('.yr').textContent=new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
