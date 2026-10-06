@@ -25,37 +25,33 @@ Design reference for the sommerlad.li homepage revamp. `index.html` is a single,
 
 ---
 
-## 2. Design system — v2 "industrial"
+## 2. Design system — v3 "period black & white"
 
-The direction is Neues Bauen and industrial rather than editorial: concrete greys, steel, hairline drawing-sheet structure, hard clip-path "cuts" instead of fades, and frosted-glass panels over photography.
+The direction is a 1920s–1950s Neues Bauen journal or archive print. Everything is strictly monochrome, and nothing should read as 2020s web (no glassmorphism, no outline type, no tech-mono, no colour accent).
 
 | Token | Value | Use |
 |---|---|---|
-| `--concrete` | `#E9EAE8` | Base background (cool, not beige) |
-| `--steel` / `--steel-2` | `#8B8F93` / `#5E6266` | Labels / body text |
-| `--graphite` | `#2A2A2A` | Works section, anthracite primary |
-| `--ink` | `#18191B` | Headlines, hero, contact |
-| `--red` | `#C8242A` | **Only accent**: index numbers, progress, CTA fills, the red "roof" bar on panels, the About rule |
-| `--paper` / `--paper-2` | `#EDE8D0` / `#E4DFC6` | Aged drawing paper: Timeline and Publications sections |
+| `--concrete` | `#ECEBE7` | Base: photographic paper white |
+| `--paper` / `--paper-2` | `#E6E4DE` / `#D9D7D0` | Archive paper: Timeline and Publications |
+| `--ink` | `#0E0E0E` | Print black: type, rules, dark sections |
+| `--graphite` | `#161616` | Works section |
+| `--steel` / `--steel-2` | `#7A7A78` / `#3D3D3B` | Labels / body text |
+| `--red` | = ink, flips to white on dark sections | Legacy name kept so existing rules work; there is no colour accent any more |
 
-Ochre is dropped. On a grey palette it reads muddy, and one signal colour feels more industrial.
-
-- **Display:** Archivo, variable, set condensed (`font-stretch: 66–72%`) in heavy uppercase. **Outlined** (transparent fill, stroke only) words alternate with solid ones.
-- **Drawing-sheet lettering:** Bebas Neue (`--display`), used for the hero, section headlines, pull quote, timeline years and footer wordmark.
-- **Section stamps:** every section header carries a drawing revision box (REV / PROJ / DATE).
-- **Technical labels:** IBM Plex Mono, used for index numbers, object numbers, coordinates and nav. This gives the "drawing title block" feel.
-- **Body:** Archivo at normal width.
-- **Signature details:**
-  - Hairline 4-column grid over the hero
-  - Glass nav bar and glass info panels (`backdrop-filter: blur`)
-  - Stats as outlined numerals in frosted cells over a photo
-  - Each work's details shown as an architectural drawing **title block** (object no. / year / location / type)
-- **Motion:** mechanical ease (`cubic-bezier(.77,0,.18,1)`):
-  - Hero slides wipe in with a hard edge
-  - Images and the footer wordmark reveal by clip-path
-  - Buttons fill with a red wipe
-  - Respects `prefers-reduced-motion`
-- **Works pile:** modelled on the macOS "Vintage Prints" screen saver. Individual white-bordered prints lie scattered at random angles, and each new one drops onto the pile and settles. It autoplays every ~5 s while in view and pauses on hover. Click the top print to open the lightbox; swipe or use the arrow keys to browse.
+- **Type:**
+  - Jost (a Futura revival; Futura dates from 1927) for display and body. Headlines contrast bold 700 with light 300 instead of using outline type.
+  - Courier Prime (typewriter) for archive labels: object numbers, captions, stamps, the coordinates.
+- **Period signatures:**
+  - Heavy 6px black rules over each section stamp, in the Tschichold "Neue Typographie" manner.
+  - The hero caption is a solid paper card "pasted" onto the photo.
+  - Album corner mounts on every print in the works pile.
+  - All photos forced to true grayscale.
+- **Film treatment:**
+  - Animated film grain over the page.
+  - A subtle projector flicker and vignette on the hero.
+  - Hero slides dip to black between frames like a newsreel cut.
+  - Reveals are slow fades rather than modern clip-path wipes.
+  - All of it is disabled under `prefers-reduced-motion`.
 
 ---
 
