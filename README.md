@@ -35,11 +35,14 @@ The direction is Neues Bauen and industrial rather than editorial: concrete grey
 | `--steel` / `--steel-2` | `#8B8F93` / `#5E6266` | Labels / body text |
 | `--graphite` | `#2A2A2A` | Works section, anthracite primary |
 | `--ink` | `#18191B` | Headlines, hero, contact |
-| `--red` | `#B5451B` | **Only accent**: index numbers, progress, CTA fills, the red "roof" bar on panels |
+| `--red` | `#C8242A` | **Only accent**: index numbers, progress, CTA fills, the red "roof" bar on panels, the About rule |
+| `--paper` / `--paper-2` | `#EDE8D0` / `#E4DFC6` | Aged drawing paper: Timeline and Publications sections |
 
 Ochre is dropped. On a grey palette it reads muddy, and one signal colour feels more industrial.
 
 - **Display:** Archivo, variable, set condensed (`font-stretch: 66–72%`) in heavy uppercase. **Outlined** (transparent fill, stroke only) words alternate with solid ones.
+- **Drawing-sheet lettering:** Bebas Neue (`--display`), used for the hero, section headlines, pull quote, timeline years and footer wordmark.
+- **Section stamps:** every section header carries a drawing revision box (REV / PROJ / DATE).
 - **Technical labels:** IBM Plex Mono, used for index numbers, object numbers, coordinates and nav. This gives the "drawing title block" feel.
 - **Body:** Archivo at normal width.
 - **Signature details:**
@@ -67,6 +70,7 @@ Ochre is dropped. On a grey palette it reads muddy, and one signal colour feels 
 | DE / EN | **Polylang** (free is enough) with its language-switcher block in the menu. The `lang` spans in this file become two separate translated pages. |
 | Hero slideshow | GenerateBlocks Container (100vh) + **the vanilla JS from this file** enqueued in the child theme (≈ 40 lines). Avoid Revolution Slider-type bloat. MetaSlider is the fallback if the client wants to manage slides themselves. |
 | About | GB Grid 50/50 with a sticky image column, a core *Pullquote* block, and a GB Grid for the stats. |
+| Timeline | CPT `ereignis`, or an ACF repeater on the front page (`jahr`, `ort`, `titel`, `text`, `bild`). Rendered as a horizontal Query Loop with drag-to-scroll JS (about 15 lines). |
 | Works | CPT **`werk`** (CPT UI) + **ACF** fields: `jahr`, `ort`, `typ`, `kurztext`, `galerie`, `featured` (bool). Homepage = GB *Query Loop* (featured only, max 5) + deck JS. The gallery page (out of scope) reuses the same CPT. |
 | Lightbox | Core Image "Expand on click", or a lightweight plugin (e.g. *Simple Lightbox*). |
 | Publications | CPT `publikation`, or a plain Query Loop on a category. |

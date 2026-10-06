@@ -7,7 +7,7 @@
 <meta name="description" content="Stiftung Sommerlad — Preserving the legacy of Liechtenstein's most important architect, Ernst Sommerlad (1895–1977).">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <!--
   ============================================================
   STIFTUNG SOMMERLAD — HOMEPAGE REVAMP (design reference v2)
@@ -17,8 +17,8 @@
   WordPress build target: GeneratePress (free) + GenerateBlocks
   (or Blocksy + native Gutenberg). Each section carries a "WP:" note.
 
-  IMAGES: drop photos into /assets using the file names in the src
-  attributes. Missing files fall back to a styled placeholder.
+  IMAGES: sample-0X.webp in /assets are pitch samples (archive photos
+  supplied by the client). Missing files fall back to a styled placeholder.
 
   CONTENT is sample copy for the pitch (intentionally approximate);
   final copy comes from the Stiftung / existing sommerlad.li.
@@ -35,10 +35,13 @@
   --graphite:#2A2A2A;     /* anthracite primary */
   --ink:#18191B;          /* deepest */
   --line:rgba(24,25,27,.14);
-  --red:#B5451B;          /* architectural red — the only accent */
+  --red:#C8242A;          /* architectural red — the only accent */
+  --paper:#EDE8D0;        /* aged drawing paper */
+  --paper-2:#E4DFC6;
 
   --f:"Archivo","Helvetica Neue",Arial,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --display:"Bebas Neue","Archivo",sans-serif;   /* drawing-sheet lettering */
 
   --gutter:clamp(16px,4vw,56px);
   --max:1440px;
@@ -47,7 +50,17 @@
 }
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--concrete);color:var(--steel-2);font:400 16px/1.65 var(--f);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body{
+  margin:0;
+  background:var(--concrete);
+  background-image:
+    repeating-linear-gradient(90deg,rgba(0,0,0,.028) 0 1px,transparent 1px 96px),
+    repeating-linear-gradient(0deg,rgba(0,0,0,.028) 0 1px,transparent 1px 96px);
+  color:var(--steel-2);
+  font:400 16px/1.65 var(--f);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
 img{display:block;max-width:100%}
 a{color:inherit}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0;border-radius:0}
@@ -63,7 +76,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
 .label{font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--steel);display:flex;align-items:center;gap:12px;margin:0 0 28px}
 .label .idx{color:var(--red)}
 .label .rule{flex:0 0 48px;height:1px;background:currentColor;opacity:.5}
-.h-xl{font:800 clamp(44px,7vw,112px)/.88 var(--f);font-stretch:72%;text-transform:uppercase;letter-spacing:-.01em;color:var(--ink);margin:0 0 36px;hyphens:auto;overflow-wrap:break-word}
+.h-xl{font:800 clamp(44px,7vw,112px)/.88 var(--display);font-synthesis:none;font-stretch:72%;text-transform:uppercase;letter-spacing:-.01em;color:var(--ink);margin:0 0 36px;hyphens:auto;overflow-wrap:break-word}
 .h-xl .o{color:transparent;-webkit-text-stroke:1.5px var(--ink)}
 .on-dark .h-xl{color:#fff}
 .on-dark .h-xl .o{-webkit-text-stroke-color:rgba(255,255,255,.85)}
@@ -147,10 +160,10 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
 .hero-slide.is-active .media img,.hero-slide.is-active .media::before{transform:scale(1.02)}
 .hero-shade{position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(180deg,rgba(18,19,21,.5) 0,rgba(18,19,21,0) 30%,rgba(18,19,21,.05) 50%,rgba(18,19,21,.82) 100%)}
 .hero-grid{position:absolute;inset:0;z-index:4;pointer-events:none;display:flex;justify-content:center}
-.hero-grid div{width:100%;max-width:calc(var(--max) - 2*var(--gutter));margin:0 var(--gutter);display:grid;grid-template-columns:repeat(4,1fr);border-left:1px solid rgba(255,255,255,.12);border-right:1px solid rgba(255,255,255,.12)}
-.hero-grid span{border-right:1px solid rgba(255,255,255,.12)}.hero-grid span:last-child{border:0}
+.hero-grid div{width:100%;max-width:calc(var(--max) - 2*var(--gutter));margin:0 var(--gutter);display:grid;grid-template-columns:repeat(4,1fr);border-left:1px solid rgba(255,255,255,.28);border-right:1px solid rgba(255,255,255,.28)}
+.hero-grid span{border-right:1px solid rgba(255,255,255,.22)}.hero-grid span:last-child{border:0}
 .hero-copy{position:absolute;z-index:5;left:0;right:0;bottom:clamp(110px,16vh,160px)}
-.hero h1{margin:0;font:900 clamp(64px,13.2vw,224px)/.8 var(--f);font-stretch:66%;text-transform:uppercase;letter-spacing:-.015em}
+.hero h1{margin:0;font:900 clamp(64px,13.2vw,224px)/.8 var(--display);font-synthesis:none;font-stretch:66%;text-transform:uppercase;letter-spacing:-.015em}
 .hero h1 .o{color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.9)}
 .hero-panel{position:absolute;z-index:6;right:max(var(--gutter),calc((100vw - var(--max))/2 + var(--gutter)));bottom:clamp(110px,16vh,160px);width:min(370px,calc(100% - 2*var(--gutter)));padding:24px 24px 22px;
   background:rgba(247,247,245,.10);backdrop-filter:blur(20px) saturate(1.2);-webkit-backdrop-filter:blur(20px) saturate(1.2);border:1px solid rgba(255,255,255,.24)}
@@ -181,7 +194,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
 .about-portrait figcaption b{display:block;font:800 24px/1 var(--f);font-stretch:78%;text-transform:uppercase;letter-spacing:.01em}
 .about-portrait figcaption small{display:block;font:500 10.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;opacity:.75;margin-top:8px}
 .about-portrait .tick{position:absolute;z-index:2;top:110px;right:var(--gutter);font:500 10.5px/1.6 var(--mono);letter-spacing:.06em;color:rgba(255,255,255,.7);text-align:right;text-transform:uppercase}
-.about-body{padding:clamp(110px,16vh,170px) var(--gutter) clamp(90px,12vh,140px) clamp(32px,5vw,80px)}
+.about-body{padding:clamp(110px,16vh,170px) var(--gutter) clamp(90px,12vh,140px) clamp(32px,5vw,80px);border-left:3px solid var(--red)}
 .about .h-xl{font-size:clamp(40px,5.2vw,86px);font-stretch:66%}
 .about-intro{font:400 clamp(20px,1.7vw,25px)/1.45 var(--f);color:var(--ink);margin:0 0 64px;max-width:34ch}
 .chapters{border-top:1px solid var(--ink)}
@@ -191,7 +204,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
 .chapter p{margin:0;max-width:52ch}
 .pullquote{position:relative;margin:64px 0;padding:44px 0 0;border-top:3px solid var(--red)}
 .pullquote::before{content:"“";position:absolute;right:0;top:4px;font:900 200px/.7 var(--f);color:transparent;-webkit-text-stroke:1.5px rgba(24,25,27,.18)}
-.pullquote p{position:relative;font:300 clamp(26px,2.6vw,40px)/1.15 var(--f);font-stretch:88%;color:var(--ink);margin:0 0 20px;letter-spacing:-.01em;max-width:20ch}
+.pullquote p{position:relative;font:300 clamp(26px,2.6vw,40px)/1.15 var(--display);font-synthesis:none;font-stretch:88%;color:var(--ink);margin:0 0 20px;letter-spacing:-.01em;max-width:20ch}
 .pullquote cite{font:500 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;font-style:normal;color:var(--steel)}
 
 /* ---------- Stats (frosted cells over image) ---------- */
@@ -322,14 +335,74 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
 .form .submit{grid-column:1/-1;display:flex;justify-content:space-between;align-items:stretch;font:500 10px/1.4 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.4)}
 .form .submit>span{display:flex;align-items:center;padding:0 18px}
 .form .btn{border:0;border-left:1px solid rgba(255,255,255,.2)}
-.giant{position:relative;margin:clamp(72px,12vh,140px) 0 0;font:900 clamp(72px,17.6vw,280px)/.78 var(--f);font-stretch:66%;text-transform:uppercase;letter-spacing:-.02em;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.22);white-space:nowrap;user-select:none;text-align:center;overflow:hidden}
+.giant{position:relative;margin:clamp(72px,12vh,140px) 0 0;font:900 clamp(72px,17.6vw,280px)/.78 var(--display);font-synthesis:none;font-stretch:66%;text-transform:uppercase;letter-spacing:-.02em;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.22);white-space:nowrap;user-select:none;text-align:center;overflow:hidden}
 .footer{position:relative;border-top:1px solid rgba(255,255,255,.12);padding:24px 0 30px;font:500 11px/1.6 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.45)}
 .footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px 32px}
 .footer nav{display:flex;gap:28px;flex-wrap:wrap}
 .footer a{text-decoration:none}.footer a:hover{color:#fff}
 
+/* ---------- Section stamp (drawing revision box on every section header) ---------- */
+.section-stamp{display:flex;align-items:flex-start;justify-content:space-between;border-top:1px solid var(--line);padding-top:14px;margin-bottom:28px;gap:24px}
+.section-stamp .label{margin:0}
+.stamp-meta{display:flex;gap:0;border:1px solid var(--line);flex-shrink:0}
+.stamp-cell{display:flex;flex-direction:column;padding:5px 10px;border-left:1px solid var(--line);gap:4px}
+.stamp-cell:first-child{border-left:0}
+.stamp-key{font:500 8px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;opacity:.5}
+.stamp-val{font:500 10px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.on-dark .section-stamp{border-top-color:rgba(255,255,255,.14)}
+.on-dark .stamp-meta{border-color:rgba(255,255,255,.2)}
+.on-dark .stamp-cell{border-color:rgba(255,255,255,.14)}
+.on-dark .stamp-key{color:rgba(255,255,255,.45)}
+.on-dark .stamp-val{color:rgba(255,255,255,.85)}
+
+/* ---------- Aged paper sections ---------- */
+.paper{
+  background:var(--paper);
+  background-image:
+    repeating-linear-gradient(90deg,rgba(0,0,0,.03) 0 1px,transparent 1px 96px),
+    repeating-linear-gradient(0deg,rgba(0,0,0,.03) 0 1px,transparent 1px 96px);
+}
+.paper .label{color:var(--steel)}
+.paper .h-xl{color:var(--ink)}
+
+/* ---------- Timeline (horizontal scroll) ---------- */
+.timeline{
+  position:relative;z-index:2;background:var(--paper);
+  background-image:
+    repeating-linear-gradient(90deg,rgba(0,0,0,.03) 0 1px,transparent 1px 96px),
+    repeating-linear-gradient(0deg,rgba(0,0,0,.03) 0 1px,transparent 1px 96px);
+  overflow:hidden;
+}
+.tl-header{padding-top:clamp(80px,12vh,130px);padding-bottom:40px;display:flex;align-items:flex-end;justify-content:space-between;gap:24px}
+.tl-header .section-stamp{flex:1;margin-bottom:0}
+.tl-hint{margin:0;font:500 10px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--steel);flex-shrink:0}
+.tl-track-wrap{overflow-x:auto;overflow-y:visible;scrollbar-width:thin;scrollbar-color:var(--red) var(--paper-2);padding-bottom:clamp(60px,10vh,110px);cursor:grab}
+.tl-track-wrap:active{cursor:grabbing}
+.tl-track-wrap::-webkit-scrollbar{height:3px}
+.tl-track-wrap::-webkit-scrollbar-track{background:var(--paper-2)}
+.tl-track-wrap::-webkit-scrollbar-thumb{background:var(--red)}
+.tl-track{display:flex;align-items:flex-start;padding:56px var(--gutter) 0;width:max-content;position:relative}
+/* The continuous spine line running through all items */
+.tl-track::before{content:"";position:absolute;left:var(--gutter);right:var(--gutter);top:28px;height:1px;background:var(--ink);opacity:.25}
+/* --drop staggers cards high/low; the tick always reaches from the spine line down to its card */
+.tl-item{--drop:0px;position:relative;width:clamp(260px,28vw,340px);flex-shrink:0;padding-right:clamp(28px,3vw,48px);margin-top:var(--drop)}
+.tl-spine{position:absolute;top:calc(-28px - var(--drop));left:0;width:1px;height:calc(28px + var(--drop));background:var(--ink);opacity:.3}
+.tl-spine::after{content:"";position:absolute;top:-3px;left:-3px;width:7px;height:7px;border:1px solid var(--ink);background:var(--paper);opacity:.8}
+.tl-year{display:block;font:900 clamp(42px,4vw,60px)/.9 var(--display,var(--f));font-synthesis:none;color:var(--ink);margin-bottom:2px;letter-spacing:-.01em}
+.tl-loc{display:block;font:500 9.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--red);margin-bottom:20px}
+.tl-media{width:100%;aspect-ratio:3/2;margin-bottom:20px}
+.tl-media img{pointer-events:none;user-select:none}
+.tl-media.tl-port{aspect-ratio:2/3;width:62%}
+.tl-card h3{font:700 14px/1.2 var(--f);letter-spacing:.06em;text-transform:uppercase;color:var(--ink);margin:0 0 10px}
+.tl-card p{margin:0;font-size:14px;line-height:1.6;color:var(--steel-2);max-width:32ch}
+/* Alternate cards high/low like a real drawn timeline */
+.tl-item:nth-child(even){--drop:80px}
+.tl-item:nth-child(3n){--drop:32px}
+
 /* ---------- Responsive ---------- */
 @media (max-width:1080px){
+  .tl-header{flex-direction:column;align-items:flex-start}
+  .tl-item{width:clamp(220px,70vw,300px)}
   .nav ul{display:none}
   .burger{display:block}
   .nav-open .nav ul{display:flex;position:fixed;top:90px;left:var(--gutter);right:var(--gutter);flex-direction:column;background:rgba(24,25,27,.82);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.18);color:#fff}
@@ -356,6 +429,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
   .hero-grid span:nth-child(2){border:0}
 }
 @media (max-width:680px){
+  .section-stamp{flex-direction:column;gap:14px}
   .brand small{display:none}
   .brand{padding:0 16px;gap:12px}
   .brand b{font-size:15px}
@@ -399,9 +473,10 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
     <nav class="nav" aria-label="Hauptnavigation">
       <ul>
         <li><a href="#about"><i>01</i><span lang="de">Architekt</span><span lang="en">Architect</span></a></li>
-        <li><a href="#works"><i>02</i><span lang="de">Werke</span><span lang="en">Works</span></a></li>
-        <li><a href="#publications"><i>03</i><span lang="de">Publikationen</span><span lang="en">Publications</span></a></li>
-        <li><a href="#contact"><i>04</i><span lang="de">Kontakt</span><span lang="en">Contact</span></a></li>
+        <li><a href="#timeline"><i>02</i><span lang="de">Lebenslauf</span><span lang="en">Timeline</span></a></li>
+        <li><a href="#works"><i>03</i><span lang="de">Werke</span><span lang="en">Works</span></a></li>
+        <li><a href="#publications"><i>04</i><span lang="de">Publikationen</span><span lang="en">Publications</span></a></li>
+        <li><a href="#contact"><i>05</i><span lang="de">Kontakt</span><span lang="en">Contact</span></a></li>
       </ul>
     </nav>
     <div style="display:flex">
@@ -418,13 +493,13 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
 <!-- ================= HERO ================= -->
 <section class="hero" aria-label="Stiftung Sommerlad">
   <div class="hero-slide is-active" data-cap-de="<b>Haus Zickert</b> — Vaduz, 1932/33" data-cap-en="<b>Haus Zickert</b> — Vaduz, 1932/33">
-    <div class="media"><img src="assets/hero-01-haus-zickert.jpg" alt="Haus Zickert, Vaduz, 1932/33" onerror="this.remove()"></div>
+    <div class="media"><img src="assets/sample-03-white-cube.webp" alt="Haus Zickert, Vaduz, 1932/33" onerror="this.remove()"></div>
   </div>
   <div class="hero-slide" data-cap-de="<b>Pfälzerhütte</b> — Malbun, 1928" data-cap-en="<b>Pfälzerhütte</b> — Malbun, 1928">
-    <div class="media" style="--ph1:#5d6165;--ph2:#2d2f32"><img src="assets/hero-02-pfaelzerhuette.jpg" alt="" onerror="this.remove()"></div>
+    <div class="media" style="--ph1:#5d6165;--ph2:#2d2f32"><img src="assets/sample-02-rounded-villa.webp" alt="" onerror="this.remove()"></div>
   </div>
   <div class="hero-slide" data-cap-de="<b>Villenquartier Ebenholz</b> — Vaduz, ab 1926" data-cap-en="<b>Villa district Ebenholz</b> — Vaduz, from 1926">
-    <div class="media" style="--ph1:#41454a;--ph2:#1f2123"><img src="assets/hero-03-ebenholz.jpg" alt="" onerror="this.remove()"></div>
+    <div class="media" style="--ph1:#41454a;--ph2:#1f2123"><img src="assets/sample-04-terrace-villa.webp" alt="" onerror="this.remove()"></div>
   </div>
   <div class="hero-shade"></div>
   <div class="hero-grid" aria-hidden="true"><div><span></span><span></span><span></span><span></span></div></div>
@@ -466,7 +541,14 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
   </figure>
 
   <div class="about-body">
-    <p class="label rise"><span class="idx">01</span><span class="rule"></span><span lang="de">Der Architekt</span><span lang="en">The Architect</span></p>
+    <div class="section-stamp">
+      <p class="label rise"><span class="idx">01</span><span class="rule"></span><span lang="de">Der Architekt</span><span lang="en">The Architect</span></p>
+      <div class="stamp-meta">
+        <span class="stamp-cell"><span class="stamp-key">REV</span><span class="stamp-val">01</span></span>
+        <span class="stamp-cell"><span class="stamp-key">PROJ</span><span class="stamp-val">ES-STIFTUNG</span></span>
+        <span class="stamp-cell"><span class="stamp-key">DATE</span><span class="stamp-val">1924–1977</span></span>
+      </div>
+    </div>
     <h2 class="h-xl rise">
       <span lang="de">Er brachte die <span class="o">Moderne</span> nach Liechtenstein</span>
       <span lang="en">He brought <span class="o">modernism</span> to Liechtenstein</span>
@@ -525,7 +607,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
 
 <!-- ================= STATS ================= -->
 <section class="stats on-dark" aria-label="Kennzahlen">
-  <div class="media"><img src="assets/stats-bg.jpg" alt="" onerror="this.remove()"></div>
+  <div class="media"><img src="assets/sample-02-rounded-villa.webp" alt="" onerror="this.remove()"></div>
   <div class="wrap">
     <ul class="rise">
       <li><span class="k">A.01</span><span class="n" data-count="1895">1895</span><span class="l"><span lang="de">Geboren in Ziegenberg</span><span lang="en">Born in Ziegenberg</span></span></li>
@@ -536,13 +618,139 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
   </div>
 </section>
 
+<!-- ================= TIMELINE ================= -->
+<!-- WP: CPT "ereignis" (or ACF repeater on the front page): jahr, ort, titel, text, bild. Rendered with a GB Query Loop; drag-scroll JS enqueued in child theme. -->
+<section class="timeline" id="timeline" aria-label="Lebenslauf">
+  <div class="tl-header wrap">
+    <div class="section-stamp">
+      <p class="label"><span class="idx">02</span><span class="rule"></span><span lang="de">Lebenslauf</span><span lang="en">Life &amp; Work</span></p>
+      <div class="stamp-meta">
+        <span class="stamp-cell"><span class="stamp-key">REV</span><span class="stamp-val">01</span></span>
+        <span class="stamp-cell"><span class="stamp-key">PROJ</span><span class="stamp-val">ES-STIFTUNG</span></span>
+        <span class="stamp-cell"><span class="stamp-key">DATE</span><span class="stamp-val">1895–1977</span></span>
+      </div>
+    </div>
+    <p class="tl-hint" lang="de">Scrollen zum Entfalten</p>
+    <p class="tl-hint" lang="en">Scroll to unfold</p>
+  </div>
+
+  <div class="tl-track-wrap">
+    <div class="tl-track">
+
+      <div class="tl-item" data-year="1895">
+        <div class="tl-spine"></div>
+        <div class="tl-card">
+          <span class="tl-year">1895</span>
+          <span class="tl-loc">Ziegenberg, Hessen</span>
+          <div class="tl-media media" style="--ph1:#7a6e5a;--ph2:#3d3629"><img src="assets/tl-01.jpg" alt="" onerror="this.remove()"></div>
+          <h3 lang="de">Geburt</h3><h3 lang="en">Birth</h3>
+          <p lang="de">Ernst Sommerlad wird in Ziegenberg, Hessen geboren.</p>
+          <p lang="en">Ernst Sommerlad is born in Ziegenberg, Hesse.</p>
+        </div>
+      </div>
+
+      <div class="tl-item" data-year="1914">
+        <div class="tl-spine"></div>
+        <div class="tl-card">
+          <span class="tl-year">1914</span>
+          <span class="tl-loc">Darmstadt · Front</span>
+          <div class="tl-media media" style="--ph1:#5a5040;--ph2:#2e2820"><img src="assets/tl-02.jpg" alt="" onerror="this.remove()"></div>
+          <h3 lang="de">Ausbildung &amp; Krieg</h3><h3 lang="en">Training &amp; War</h3>
+          <p lang="de">Studium an der TH Darmstadt. Kriegsdienst im Alpenkorps. 1918 französische Gefangenschaft, Flucht über Spanien.</p>
+          <p lang="en">Studies at TH Darmstadt. War service in the Alpine Corps. 1918 French captivity, escape via Spain.</p>
+        </div>
+      </div>
+
+      <div class="tl-item" data-year="1924">
+        <div class="tl-spine"></div>
+        <div class="tl-card">
+          <span class="tl-year">1924</span>
+          <span class="tl-loc">Vaduz, Liechtenstein</span>
+          <div class="tl-media media" style="--ph1:#4a4e52;--ph2:#26282b"><img src="assets/sample-01-porch-house.webp" alt="" onerror="this.remove()"></div>
+          <h3 lang="de">Ankunft per Fahrrad</h3><h3 lang="en">Arrival by bicycle</h3>
+          <p lang="de">Mit 500 Franken in der Tasche und dem Fahrrad kommt er ins Fürstentum. Beginnt sein Büro in Schaan.</p>
+          <p lang="en">With 500 francs in his pocket, he arrives by bicycle. Opens his office in Schaan.</p>
+        </div>
+      </div>
+
+      <div class="tl-item" data-year="1926">
+        <div class="tl-spine"></div>
+        <div class="tl-card">
+          <span class="tl-year">1926</span>
+          <span class="tl-loc">Vaduz · Ebenholz</span>
+          <div class="tl-media media" style="--ph1:#5e6468;--ph2:#303538"><img src="assets/sample-04-terrace-villa.webp" alt="" onerror="this.remove()"></div>
+          <h3 lang="de">Villenquartier</h3><h3 lang="en">Villa District</h3>
+          <p lang="de">Sommerlad überzeugt den Gemeinderat zur Erschliessung des Villenquartiers Ebenholz. Erste Bauten entstehen.</p>
+          <p lang="en">Sommerlad persuades the council to open the Ebenholz villa district. First buildings rise.</p>
+        </div>
+      </div>
+
+      <div class="tl-item" data-year="1928">
+        <div class="tl-spine"></div>
+        <div class="tl-card">
+          <span class="tl-year">1928</span>
+          <span class="tl-loc">Bettlerjoch, 2108m</span>
+          <div class="tl-media media tl-port" style="--ph1:#6a7074;--ph2:#35393c"><img src="assets/tl-05.jpg" alt="" onerror="this.remove()"></div>
+          <h3>Pfälzerhütte</h3>
+          <p lang="de">Gewinn des internationalen Alpenvereins-Wettbewerbs. Die Hütte wird bis heute als Meisterwerk alpiner Architektur gefeiert.</p>
+          <p lang="en">Wins the international Alpine Club competition. The hut is celebrated to this day as a masterpiece of Alpine architecture.</p>
+        </div>
+      </div>
+
+      <div class="tl-item" data-year="1932">
+        <div class="tl-spine"></div>
+        <div class="tl-card">
+          <span class="tl-year">1932/33</span>
+          <span class="tl-loc">Feldstrasse 17, Vaduz</span>
+          <div class="tl-media media" style="--ph1:#5b5f63;--ph2:#2c2e31"><img src="assets/sample-03-white-cube.webp" alt="" onerror="this.remove()"></div>
+          <h3>Haus Zickert</h3>
+          <p lang="de">Das „kühnste Stück“ — Viertelkreisgrundriss, Flachdach, heute denkmalgeschützt. Sommerlads mutigster Bau.</p>
+          <p lang="en">The “boldest piece” — quarter-circle plan, flat roof, now listed. Sommerlad’s most audacious building.</p>
+        </div>
+      </div>
+
+      <div class="tl-item" data-year="1941">
+        <div class="tl-spine"></div>
+        <div class="tl-card">
+          <span class="tl-year">1938–41</span>
+          <span class="tl-loc">Vaduz</span>
+          <div class="tl-media media" style="--ph1:#3a3d40;--ph2:#1e2022"><img src="assets/tl-07.jpg" alt="" onerror="this.remove()"></div>
+          <h3 lang="de">Widerstand</h3><h3 lang="en">Resistance</h3>
+          <p lang="de">Verhaftung durch die SS. Verweigerung des NSDAP-Beitritts. Ausbürgerung 1941. Verliert seine Niederlassungsbewilligung.</p>
+          <p lang="en">Arrested by the SS. Refuses NSDAP membership. Stripped of citizenship in 1941. Loses his residency permit.</p>
+        </div>
+      </div>
+
+      <div class="tl-item" data-year="1974">
+        <div class="tl-spine"></div>
+        <div class="tl-card">
+          <span class="tl-year">1924–1974</span>
+          <span class="tl-loc">Liechtenstein · Schweiz · Vorarlberg</span>
+          <div class="tl-media media" style="--ph1:#4e5256;--ph2:#28292c"><img src="assets/sample-02-rounded-villa.webp" alt="" onerror="this.remove()"></div>
+          <h3 lang="de">256 Bauten</h3><h3 lang="en">256 Buildings</h3>
+          <p lang="de">50 Jahre Schaffen, allein. 1974 schliesst er sein Büro. 1977 stirbt er im Alter von 82 Jahren.</p>
+          <p lang="en">50 years of work, alone. He closes his office in 1974. Dies in 1977, aged 82.</p>
+        </div>
+      </div>
+
+    </div><!-- /tl-track -->
+  </div><!-- /tl-track-wrap -->
+</section>
+
 <!-- ================= WORKS ================= -->
 <!-- Homepage shows exactly 5 highlights (ACF "featured" = true, max 5). Everything else lives in the gallery (/werke/). -->
 <section class="works on-dark" id="works">
   <div class="wrap">
     <div class="works-head">
       <div>
-        <p class="label rise"><span class="idx">02</span><span class="rule"></span><span lang="de">5 Highlights aus 256 Werken</span><span lang="en">5 highlights from 256 works</span></p>
+        <div class="section-stamp">
+          <p class="label rise"><span class="idx">03</span><span class="rule"></span><span lang="de">5 Highlights aus 256 Werken</span><span lang="en">5 highlights from 256 works</span></p>
+          <div class="stamp-meta">
+            <span class="stamp-cell"><span class="stamp-key">REV</span><span class="stamp-val">01</span></span>
+            <span class="stamp-cell"><span class="stamp-key">PROJ</span><span class="stamp-val">ES-STIFTUNG</span></span>
+            <span class="stamp-cell"><span class="stamp-key">DATE</span><span class="stamp-val">1924–1977</span></span>
+          </div>
+        </div>
         <h2 class="h-xl rise"><span lang="de">Moderne, <span class="o">alpin</span> gedacht</span><span lang="en">Modernism, <span class="o">Alpine</span> by nature</span></h2>
       </div>
       <p class="hint rise"><span lang="de">Foto antippen zum Vergrössern<br>Wischen oder ← → zum Blättern</span><span lang="en">Tap a print to enlarge<br>Swipe or ← → to browse</span></p>
@@ -555,7 +763,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
 
       <div>
         <div class="story" aria-live="polite">
-          <article class="story-item is-active" data-img="assets/work-01-haus-zickert.jpg" data-shape="land" data-ph="#5b5f63,#2c2e31">
+          <article class="story-item is-active" data-img="assets/sample-03-white-cube.webp" data-shape="land" data-ph="#5b5f63,#2c2e31">
             <h3 class="title">Haus Zickert</h3>
             <dl class="titleblock">
               <div><dt><span lang="de">Objekt-Nr.</span><span lang="en">Object no.</span></dt><dd>ES-1932-04</dd></div>
@@ -566,7 +774,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
             <p lang="de">Das „Viertelkreishaus“ für den Financier Dr. Hermann Zickert – Sommerlads kühnstes Werk und erstes Projekt der Stiftung, sorgfältig renoviert 2016/17. Flachdach ja, aber nie ohne das traditionelle Vordach.</p>
             <p lang="en">The “quarter-circle house” for financier Dr Hermann Zickert – Sommerlad’s boldest work and the foundation’s first project, carefully renovated in 2016/17. A flat roof, yes – but never without the traditional eaves.</p>
           </article>
-          <article class="story-item" data-img="assets/work-02-pfaelzerhuette.jpg" data-shape="port" data-ph="#6a6e72,#36393c">
+          <article class="story-item" data-img="assets/sample-01-porch-house.webp" data-shape="port" data-ph="#6a6e72,#36393c">
             <h3 class="title">Pfälzerhütte</h3>
             <dl class="titleblock">
               <div><dt><span lang="de">Objekt-Nr.</span><span lang="en">Object no.</span></dt><dd>ES-1928-02</dd></div>
@@ -577,7 +785,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
             <p lang="de">Auf über 2’100 Metern zeigt Sommerlad, dass Moderne und Hochgebirge zusammengehen: kompakter Baukörper, robuste Materialien, ein Haus, das dem Wetter standhält.</p>
             <p lang="en">At over 2,100 metres Sommerlad proves modernism belongs in the high Alps: a compact volume, robust materials, a house built to stand up to the weather.</p>
           </article>
-          <article class="story-item" data-img="assets/work-03-elektrizitaetswerk.jpg" data-shape="land" data-ph="#474b4f,#222426">
+          <article class="story-item" data-img="assets/sample-02-rounded-villa.webp" data-shape="land" data-ph="#474b4f,#222426">
             <h3 class="title">Landeswerk Vaduz</h3>
             <dl class="titleblock">
               <div><dt><span lang="de">Objekt-Nr.</span><span lang="en">Object no.</span></dt><dd>ES-1927-01</dd></div>
@@ -588,7 +796,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
             <p lang="de">Das staatliche Elektrizitätswerk gehört zu seinen frühesten Bauten im Land – Architektur als Zeichen eines Kleinstaats, der sich modernisiert.</p>
             <p lang="en">The state electricity works is among his earliest buildings in the country – architecture as the signature of a small state modernising itself.</p>
           </article>
-          <article class="story-item" data-img="assets/work-04-villenquartier.jpg" data-shape="port" data-ph="#53575b,#2a2c2f">
+          <article class="story-item" data-img="assets/sample-04-terrace-villa.webp" data-shape="port" data-ph="#53575b,#2a2c2f">
             <h3 class="title">Villenquartier Ebenholz</h3>
             <dl class="titleblock">
               <div><dt><span lang="de">Objekt-Nr.</span><span lang="en">Object no.</span></dt><dd>ES-1926-03</dd></div>
@@ -599,7 +807,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
             <p lang="de">Sommerlad plante das Vaduzer Villenquartier und baute dort Haus um Haus – ein ganzes Stadtviertel als Lehrstück des Neuen Bauens.</p>
             <p lang="en">Sommerlad planned the Vaduz villa district and built it house by house – an entire neighbourhood as a lesson in Neues Bauen.</p>
           </article>
-          <article class="story-item" data-img="assets/work-05-fuerst-johannes-strasse.jpg" data-shape="land" data-ph="#606468,#303235">
+          <article class="story-item" data-img="assets/sample-01-porch-house.webp" data-shape="land" data-ph="#606468,#303235">
             <h3 class="title">Haus Fürst-Johannes-Strasse</h3>
             <dl class="titleblock">
               <div><dt><span lang="de">Objekt-Nr.</span><span lang="en">Object no.</span></dt><dd>ES-1934-07</dd></div>
@@ -622,10 +830,10 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
     <!-- Gallery teaser: the other 251 works live on the gallery page (out of scope for this quote) -->
     <a class="gallery-cta rise" href="/werke/">
       <span class="gallery-thumbs" aria-hidden="true">
-        <span class="media"><img src="assets/gallery-01.jpg" alt="" onerror="this.remove()"></span>
-        <span class="media"><img src="assets/gallery-02.jpg" alt="" onerror="this.remove()"></span>
-        <span class="media"><img src="assets/gallery-03.jpg" alt="" onerror="this.remove()"></span>
-        <span class="media"><img src="assets/gallery-04.jpg" alt="" onerror="this.remove()"></span>
+        <span class="media"><img src="assets/sample-01-porch-house.webp" alt="" onerror="this.remove()"></span>
+        <span class="media"><img src="assets/sample-02-rounded-villa.webp" alt="" onerror="this.remove()"></span>
+        <span class="media"><img src="assets/sample-03-white-cube.webp" alt="" onerror="this.remove()"></span>
+        <span class="media"><img src="assets/sample-04-terrace-villa.webp" alt="" onerror="this.remove()"></span>
       </span>
       <span class="gallery-text">
         <b>+251</b>
@@ -637,11 +845,18 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
 </section>
 
 <!-- ================= PUBLICATIONS ================= -->
-<section class="pubs" id="publications">
+<section class="pubs paper" id="publications">
   <div class="wrap">
     <div class="pubs-head">
       <div>
-        <p class="label rise"><span class="idx">03</span><span class="rule"></span><span lang="de">Publikationen</span><span lang="en">Publications</span></p>
+        <div class="section-stamp">
+          <p class="label rise"><span class="idx">04</span><span class="rule"></span><span lang="de">Publikationen</span><span lang="en">Publications</span></p>
+          <div class="stamp-meta">
+            <span class="stamp-cell"><span class="stamp-key">REV</span><span class="stamp-val">01</span></span>
+            <span class="stamp-cell"><span class="stamp-key">PROJ</span><span class="stamp-val">ES-STIFTUNG</span></span>
+            <span class="stamp-cell"><span class="stamp-key">DATE</span><span class="stamp-val">1924–1977</span></span>
+          </div>
+        </div>
         <h2 class="h-xl rise" style="margin:0"><span lang="de">Lesen &amp; <span class="o">forschen</span></span><span lang="en">Read &amp; <span class="o">research</span></span></h2>
       </div>
       <p class="rise"><span lang="de">Monografien, Ausstellungen und Forschung rund um Ernst Sommerlad – herausgegeben oder begleitet von der Stiftung.</span><span lang="en">Monographs, exhibitions and research on Ernst Sommerlad – published or supported by the foundation.</span></p>
@@ -680,7 +895,14 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
   <div class="wrap">
     <div class="contact-grid">
       <div>
-        <p class="label rise"><span class="idx">04</span><span class="rule"></span><span lang="de">Kontakt</span><span lang="en">Contact</span></p>
+        <div class="section-stamp">
+          <p class="label rise"><span class="idx">05</span><span class="rule"></span><span lang="de">Kontakt</span><span lang="en">Contact</span></p>
+          <div class="stamp-meta">
+            <span class="stamp-cell"><span class="stamp-key">REV</span><span class="stamp-val">01</span></span>
+            <span class="stamp-cell"><span class="stamp-key">PROJ</span><span class="stamp-val">ES-STIFTUNG</span></span>
+            <span class="stamp-cell"><span class="stamp-key">DATE</span><span class="stamp-val">1924–1977</span></span>
+          </div>
+        </div>
         <h2 class="h-xl rise"><span lang="de">Archiv &amp; <span class="o">Anfragen</span></span><span lang="en">Archive &amp; <span class="o">enquiries</span></span></h2>
         <dl class="addr rise">
           <div><dt><span lang="de">Adresse</span><span lang="en">Address</span></dt><dd>Stiftung Sommerlad<br>Städtle 1<br>9490 Vaduz, Liechtenstein</dd></div>
@@ -846,6 +1068,24 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
   lb.addEventListener('click',function(e){if(e.target===lb||e.target.classList.contains('close'))closeLB()});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!lb.hidden)closeLB()});
   kick();
+
+  /* ---------- Timeline: drag-to-scroll (mouse only; touch uses native scrolling) ---------- */
+  (function(){
+    var wrap=document.querySelector('.tl-track-wrap');
+    if(!wrap)return;
+    var down=false,startX,scrollLeft;
+    wrap.addEventListener('mousedown',function(e){
+      down=true;startX=e.pageX-wrap.offsetLeft;scrollLeft=wrap.scrollLeft;
+    });
+    wrap.addEventListener('mouseleave',function(){down=false});
+    wrap.addEventListener('mouseup',function(){down=false});
+    wrap.addEventListener('mousemove',function(e){
+      if(!down)return;
+      e.preventDefault();
+      wrap.scrollLeft=scrollLeft-(e.pageX-wrap.offsetLeft-startX);
+    });
+    wrap.addEventListener('dragstart',function(e){e.preventDefault()}); // stop native image ghost-drag
+  })();
 
   /* ---------- Reveals + count-up ---------- */
   var io=new IntersectionObserver(function(es){es.forEach(function(e){
